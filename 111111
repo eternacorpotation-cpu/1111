@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lerne Geschäftsenglisch mit 38 Karteikarten, abwechslungsreichen Übungen und E-Mail-Aufgaben. Mit Lernfortschritt und gezielten Wiederholungen – auch offline.">
+  <meta name="theme-color" content="#4f46e5">
+  <title>Vocab Master — Geschäftsbriefe &amp; E-Mails</title>
+  <style>
+    :root { color-scheme: light; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #0f172a; background: #f1f5f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button { font: inherit; -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    button:focus-visible { outline: 3px solid #818cf8; outline-offset: 5px; }
+    button, .flashcard { touch-action: manipulation; }
+    [hidden] { display: none !important; }
+    svg { display: block; flex-shrink: 0; }
+    .page { min-height: 100vh; min-height: 100dvh; padding: 16px; display: flex; justify-content: center; }
+    .shell { width: 100%; max-width: 672px; }
+    .header { margin-bottom: 24px; text-align: center; }
+    .header h1 { margin: 0 0 4px; color: #4f46e5; font-size: clamp(30px, 8vw, 36px); line-height: 1.12; font-weight: 900; letter-spacing: -.025em; font-style: italic; text-transform: uppercase; }
+    .subtitle { display: flex; align-items: center; justify-content: center; gap: 8px; color: #94a3b8; font-size: 10px; line-height: 1.6; letter-spacing: .2em; font-weight: 700; text-transform: uppercase; }
+    .subtitle::before, .subtitle::after { content: ""; height: 1px; width: 32px; background: #e2e8f0; flex: 0 0 32px; }
+    .categories { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
+    .category { padding: 6px 16px; border: 2px solid #e2e8f0; border-radius: 9999px; background: #fff; color: #64748b; font-size: 11px; line-height: 1.5; font-weight: 900; text-transform: uppercase; transition: background .2s, border-color .2s, color .2s, box-shadow .2s; }
+    .category:hover { border-color: #a5b4fc; }
+    .category[aria-pressed="true"] { background: #4f46e5; border-color: #4f46e5; color: #fff; box-shadow: 0 10px 15px -3px rgb(0 0 0 / .1), 0 4px 6px -4px rgb(0 0 0 / .1); }
+    .review-banner { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px 24px; margin-bottom: 32px; border: 2px solid #fde68a; border-radius: 24px; background: #fef3c7; color: #92400e; text-align: center; font-size: 12px; font-weight: 900; text-transform: uppercase; animation: pulse 2s ease-in-out infinite; }
+    .progress-track { width: 100%; height: 8px; margin-bottom: 32px; border-radius: 9999px; overflow: hidden; background: #e2e8f0; }
+    .progress-fill { width: 0; height: 100%; background: #6366f1; box-shadow: 0 0 10px rgb(99 102 241 / .5); transition: width .5s ease-out; }
+    .dashboard { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 16px; padding: 0 4px; }
+    .progress-label { display: block; margin-bottom: 2px; color: #94a3b8; font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .progress-count { display: flex; align-items: baseline; white-space: nowrap; }
+    .current-number { color: #1e293b; font-size: 36px; line-height: 1; font-weight: 900; }
+    .deck-total { margin-left: 4px; color: #cbd5e1; font-size: 20px; font-weight: 700; }
+    .counters { display: flex; gap: 12px; }
+    .counter { min-width: 75px; padding: 8px 16px; border-bottom: 4px solid; border-radius: 16px; background: #fff; text-align: center; }
+    .counter-label { display: block; font-size: 9px; font-weight: 900; text-transform: uppercase; }
+    .counter-value { display: block; font-size: 18px; line-height: 1.5; font-weight: 700; }
+    .counter.learned { border-color: #bbf7d0; color: #15803d; }
+    .counter.learned .counter-label { color: #16a34a; }
+    .counter.mistakes { border-color: #fecaca; color: #b91c1c; }
+    .counter.mistakes .counter-label { color: #ef4444; }
+    .flashcard { position: relative; display: block; width: 100%; height: 380px; padding: 0; margin: 0 0 40px; border: 0; border-radius: 48px; background: transparent; perspective: 1000px; text-align: center; }
+    .card-inner { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .7s ease; }
+    .card-inner.flipped { transform: rotateY(180deg); }
+    .card-inner.instant { transition: none; }
+    .face { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 48px; padding: 32px 24px; -webkit-backface-visibility: hidden; backface-visibility: hidden; overflow: hidden; }
+    .front { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; row-gap: 16px; align-items: center; border: 2px solid #fff; background: #fff; box-shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1); transition: border-color .2s; }
+    .flashcard:hover .front { border-color: #e0e7ff; }
+    .badge { display: block; justify-self: center; max-width: 100%; padding: 4px 16px; border-radius: 9999px; background: #eef2ff; color: #6366f1; font-size: 10px; line-height: 1.5; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; overflow-wrap: anywhere; }
+    .phrase-area { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; width: 100%; }
+    .phrase { display: block; width: 100%; margin: 0; font-size: 30px; line-height: 1.25; overflow-wrap: break-word; hyphens: auto; }
+    .front .phrase-area { align-self: stretch; }
+    .front .phrase { color: #1e293b; font-weight: 700; }
+    .hint { display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: .4; transition: opacity .2s; }
+    .hint-text { color: #94a3b8; font-size: 10px; line-height: 1.5; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; }
+    .hint svg { color: #818cf8; }
+    .flashcard:hover .hint, .flashcard:focus-visible .hint { opacity: 1; }
+    .back { display: flex; flex-direction: column; align-items: center; justify-content: center; border: 10px solid rgb(99 102 241 / .3); background: #4f46e5; color: #fff; transform: rotateY(180deg); box-shadow: 0 25px 50px -12px rgb(0 0 0 / .25); }
+    .translation-label { display: block; flex-shrink: 0; margin-bottom: 24px; color: #c7d2fe; font-size: 12px; line-height: 1.5; font-weight: 900; letter-spacing: .3em; text-transform: uppercase; }
+    .back .phrase-area { max-height: calc(100% - 42px); flex-shrink: 1; }
+    .back .phrase { font-weight: 900; text-transform: uppercase; filter: drop-shadow(0 20px 13px rgb(0 0 0 / .03)) drop-shadow(0 8px 5px rgb(0 0 0 / .08)); }
+    .response-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .response { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 8px; border: 0; border-bottom: 8px solid; border-radius: 32px; background: #fff; box-shadow: 0 10px 15px -3px rgb(0 0 0 / .1), 0 4px 6px -4px rgb(0 0 0 / .1); transition: background .2s, color .2s, border-color .2s, transform .1s; }
+    .response span { margin-top: 8px; font-size: 12px; line-height: 1.5; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .response.no { color: #ef4444; border-color: #fef2f2; }
+    .response.yes { color: #22c55e; border-color: #f0fdf4; }
+    @media (hover: hover) {
+      .response.no:hover { background: #ef4444; border-color: #dc2626; color: #fff; }
+      .response.yes:hover { background: #22c55e; border-color: #16a34a; color: #fff; }
+    }
+    .response:active { transform: translateY(5px) scale(.95); }
+    .summary { padding: 40px; border-bottom: 20px solid #eef2ff; border-radius: 56px; background: #fff; box-shadow: 0 25px 50px -12px rgb(0 0 0 / .25); text-align: center; animation: fadeIn .5s ease-out; }
+    .result-icon { display: flex; align-items: center; justify-content: center; width: 112px; height: 112px; margin: 0 auto 40px; border-radius: 50%; background: #eef2ff; color: #4f46e5; box-shadow: 0 0 0 12px rgb(238 242 255 / .5); }
+    .summary h2 { margin: 0 0 20px; color: #1e293b; font-size: 36px; line-height: 1.12; font-weight: 900; letter-spacing: -.025em; text-transform: uppercase; }
+    .summary h2:focus { outline: none; }
+    .summary p { margin: 0 0 48px; color: #64748b; font-size: 18px; line-height: 1.625; font-weight: 600; }
+    .summary p strong { font-weight: 900; }
+    .success-text { color: #16a34a; }
+    .error-text { color: #ef4444; }
+    .summary-actions { max-width: 320px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+    .action { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 20px 14px; border: 0; border-radius: 24px; color: #fff; font-size: 20px; line-height: 1.4; font-weight: 900; transition: background .2s, transform .1s; }
+    .action:active { transform: scale(.95); }
+    .review-action { background: #f59e0b; box-shadow: 0 10px 20px rgb(245 158 11 / .4); }
+    .review-action:hover { background: #d97706; }
+    .new-action { background: #4f46e5; box-shadow: 0 10px 20px rgb(79 70 229 / .4); }
+    .new-action:hover { background: #4338ca; }
+    .reset-action { margin-top: 0; padding: 16px 0; border: 0; background: transparent; color: #94a3b8; font-size: 11px; line-height: 1.5; font-weight: 900; letter-spacing: .25em; text-transform: uppercase; transition: color .2s; }
+    .reset-action:hover { color: #6366f1; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .65; } }
+    @media (min-width: 768px) {
+      .page { padding: 32px; }
+      .face { padding: 40px; }
+      .phrase { font-size: 36px; }
+      .summary { padding: 56px; }
+    }
+    @media (max-width: 359px) {
+      .subtitle { letter-spacing: .15em; }
+      .subtitle::before, .subtitle::after { width: 16px; flex-basis: 16px; }
+      .category { padding: 6px 12px; }
+      .counters { gap: 8px; }
+      .counter { min-width: 65px; padding: 8px 10px; }
+      .response-buttons { gap: 16px; }
+      .response span { font-size: 11px; }
+      .summary { padding: 32px 20px; border-radius: 40px; }
+      .summary h2 { font-size: 30px; }
+      .action { font-size: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  /* The original Vocab Master palette and flashcard are retained. */
+.shell { max-width: 900px; }
+.vm-pane { width: 100%; }
+#cards-pane { max-width: 672px; margin: 0 auto; }
+.vm-stats { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:18px 0 12px; }
+.vm-stat { padding:7px 12px; border-radius:14px; background:#fff; color:#475569; font-size:12px; font-weight:800; }
+.vm-stat:first-child { color:#4f46e5; background:#e0e7ff; }
+.vm-goal { max-width:360px; margin:0 auto 16px; }
+.vm-goal-label { display:flex; justify-content:space-between; gap:10px; font-size:10px; font-weight:800; color:#64748b; margin-bottom:6px; }
+.vm-goal-track { height:5px; border-radius:10px; background:#e2e8f0; overflow:hidden; }
+.vm-goal-fill { height:100%; background:#22c55e; transition:width .25s; }
+.vm-tabs { max-width:672px; display:grid; grid-template-columns:1fr 1fr 1.25fr; padding:5px; border:1px solid #e2e8f0; border-radius:20px; background:#e2e8f0; gap:4px; margin:0 auto 22px; }
+.vm-tab { border:0; border-radius:15px; padding:13px 8px; background:transparent; color:#64748b; font-weight:850; font-size:13px; }
+.vm-tab[aria-selected="true"] { background:#4f46e5; color:#fff; box-shadow:0 4px 10px #4f46e522; }
+.vm-tab:hover:not([aria-selected="true"]) { background:#fff9; }
+.vm-panel { background:#fff; border:1px solid #e2e8f0; border-radius:28px; padding:26px; box-shadow:0 10px 25px #0f172a06; }
+.vm-panel h2 { margin:0 0 8px; font-size:25px; font-weight:850; color:#1e293b; letter-spacing:-.02em; }
+.vm-panel h3 { margin:0 0 10px; color:#1e293b; }
+.vm-primary,.vm-secondary { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border:2px solid transparent; border-radius:15px; font-weight:800; font-size:14px; line-height:1.3; transition:background .15s,transform .15s; }
+.vm-primary { color:#fff; background:#4f46e5; }
+.vm-primary:hover { background:#4338ca; }
+.vm-secondary { color:#475569; border-color:#e2e8f0; background:#fff; }
+.vm-secondary:hover { border-color:#a5b4fc; background:#eef2ff; }
+.vm-primary:disabled,.vm-secondary:disabled { cursor:default; opacity:.5; }
+.vm-primary:active,.vm-secondary:active { transform:translateY(1px); }
+.vm-small { font-size:12px; line-height:1.6; }
+.vm-muted { color:#64748b; }
+.vm-pill { display:inline-flex; align-items:center; padding:5px 10px; border-radius:999px; background:#eef2ff; color:#4f46e5; font-size:11px; font-weight:800; }
+.vm-input,.vm-select { display:block; width:100%; box-sizing:border-box; border:2px solid #e2e8f0; border-radius:13px; background:#fff; color:#1e293b; padding:12px 13px; font-family:inherit; font-size:16px; line-height:1.45; }
+.vm-input:focus,.vm-select:focus { outline:0; border-color:#818cf8; box-shadow:0 0 0 3px #e0e7ff; }
+.vm-input:disabled { background:#f8fafc; color:#475569; }
+.vm-input::placeholder { color:#94a3b8; }
+textarea.vm-input { min-height:220px; resize:vertical; }
+.vm-progress { max-width:672px; margin:26px auto 0; color:#64748b; }
+.vm-progress summary { cursor:pointer; padding:12px 16px; border:1px solid #e2e8f0; border-radius:14px; background:#ffffff90; font-size:12px; font-weight:800; }
+.vm-progress-body { padding:16px 0; font-size:12px; line-height:1.6; }
+.vm-table-wrap { overflow:auto; border:1px solid #e2e8f0; border-radius:14px; max-height:400px; }
+.vm-table-wrap table { border-collapse:collapse; width:100%; min-width:560px; background:#fff; }
+.vm-table-wrap th { text-align:left; font-size:10px; text-transform:uppercase; background:#eef2ff; color:#4f46e5; position:sticky; top:0; }
+.vm-table-wrap th,.vm-table-wrap td { padding:10px 12px; border-bottom:1px solid #e2e8f0; }
+.vm-table-wrap td:first-child { min-width:230px; max-width:280px; }
+.vm-table-wrap td small { display:block; color:#94a3b8; }
+.vm-footer { max-width:672px; margin:14px auto 0; text-align:center; color:#94a3b8; font-size:11px; line-height:1.5; }
+.vm-title-note { margin:8px 0 18px; color:#64748b; font-size:13px; line-height:1.6; }
+@media(max-width:500px){
+ .page { padding:14px; }
+ .vm-panel { padding:20px 16px; border-radius:24px; }
+ .vm-panel h2 { font-size:22px; }
+ .vm-tabs { border-radius:17px; }
+ .vm-tab { font-size:11px; padding:12px 6px; }
+ .vm-stat { font-size:10px; padding:6px 9px; }
+ .vm-primary,.vm-secondary { font-size:13px; padding:12px 14px; }
+}
+
+.practice-module { width: 100%; }
+.practice-module button:disabled { cursor: not-allowed; opacity: .5; }
+.practice-module .vm-panel { padding: clamp(22px, 5vw, 40px); }
+.practice-kicker { color: #6366f1; font-size: 10px; font-weight: 900; letter-spacing: .15em; line-height: 1.6; }
+.practice-heading { margin: 8px 0 12px; font-size: clamp(27px, 5vw, 34px); line-height: 1.15; font-weight: 900; letter-spacing: -.025em; }
+.practice-intro { margin: 0 0 24px; color: #64748b; font-size: 14px; line-height: 1.7; }
+.practice-format-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0 0 26px; }
+.practice-format { display: flex; align-items: center; gap: 9px; padding: 12px 10px; border-radius: 15px; background: #f8fafc; color: #475569; font-size: 11px; line-height: 1.4; font-weight: 700; }
+.practice-format-number { flex-shrink: 0; color: #818cf8; font-size: 11px; font-weight: 900; }
+.practice-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.practice-filters label { display: flex; flex-direction: column; gap: 8px; color: #475569; font-size: 12px; font-weight: 800; }
+.practice-filters select { width: 100%; min-width: 0; }
+.practice-due-toggle { display: flex; align-items: flex-start; gap: 10px; margin: 21px 0 12px; font-size: 13px; line-height: 1.5; color: #475569; cursor: pointer; }
+.practice-due-toggle input { margin: 3px 0 0; width: 17px; height: 17px; accent-color: #4f46e5; flex-shrink: 0; }
+.practice-pool-info { min-height: 22px; margin: 12px 0 18px; color: #64748b; font-size: 12px; line-height: 1.6; }
+.practice-start { width: 100%; justify-content: center; gap: 10px; }
+.practice-small-note { margin: 18px 0 0; color: #94a3b8; font-size: 11px; line-height: 1.65; }
+.practice-lesson-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 16px; }
+.practice-link { border: 0; padding: 6px 0; background: transparent; color: #64748b; font-size: 12px; line-height: 1.5; font-weight: 750; text-align: left; }
+.practice-link:hover { color: #4f46e5; }
+.practice-lesson-xp { display: inline-block; padding: 7px 12px; border-radius: 999px; background: #eef2ff; color: #4f46e5; font-size: 12px; font-weight: 900; white-space: nowrap; }
+.practice-progress { height: 8px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+.practice-progress span { display: block; height: 100%; border-radius: inherit; background: #6366f1; transition: width .25s ease; }
+.practice-round-info { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 10px 2px 18px; color: #64748b; font-size: 11px; font-weight: 750; line-height: 1.5; }
+.practice-round-info span:last-child { color: #6366f1; text-align: right; }
+.practice-mode-label { color: #6366f1; font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.practice-question-heading { margin: 9px 0 24px; color: #1e293b; font-size: clamp(22px, 5vw, 28px); line-height: 1.25; letter-spacing: -.02em; }
+.practice-question-heading:focus, #practice-feedback-title:focus, #practice-result-heading:focus { outline: 0; }
+.practice-question-text { margin: 0 0 14px; color: #1e293b; font-size: 19px; line-height: 1.55; font-weight: 700; overflow-wrap: anywhere; }
+.practice-translation { margin: 0 0 20px; color: #64748b; font-size: 13px; line-height: 1.7; }
+.practice-translation strong { color: #4f46e5; font-weight: 750; }
+.practice-choices { display: flex; flex-direction: column; gap: 12px; padding: 0; margin: 0 0 14px; border: 0; }
+.practice-choice { display: flex; align-items: center; gap: 12px; width: 100%; padding: 16px; border: 2px solid #e2e8f0; border-bottom-width: 4px; border-radius: 18px; background: #fff; color: #334155; text-align: left; font-size: 14px; line-height: 1.55; transition: border-color .15s, background .15s; }
+.practice-choice:hover:not(:disabled) { border-color: #a5b4fc; background: #f8fafc; }
+.practice-choice.is-selected { border-color: #6366f1; background: #eef2ff; color: #3730a3; }
+.practice-choice:disabled { opacity: .7; }
+.practice-choice.is-selected:disabled { opacity: 1; }
+.practice-choice span:last-child { min-width: 0; overflow-wrap: anywhere; }
+.practice-choice-letter { display: grid; place-items: center; flex-shrink: 0; width: 26px; height: 26px; border: 1px solid #cbd5e1; border-radius: 8px; color: #94a3b8; font-size: 11px; font-weight: 900; }
+.practice-choice.is-selected .practice-choice-letter { border-color: #a5b4fc; color: #4f46e5; background: #fff; }
+.practice-cloze { margin: 0 0 16px; color: #1e293b; font-size: clamp(20px, 4.5vw, 26px); font-weight: 750; line-height: 1.7; overflow-wrap: anywhere; }
+.practice-cloze-stage { margin: 0 0 10px; color: #6366f1; font-size: 11px; font-weight: 800; line-height: 1.6; }
+.practice-gap { color: #4f46e5; white-space: nowrap; letter-spacing: .02em; }
+.practice-error-sentence { margin: 0 0 16px; padding: 18px; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 18px; color: #9a3412; font-size: 18px; line-height: 1.6; font-weight: 700; overflow-wrap: anywhere; }
+.practice-input-label { display: block; margin: 0 0 8px; color: #475569; font-size: 12px; font-weight: 750; }
+.practice-answer { display: block; width: 100%; min-width: 0; min-height: 86px; resize: vertical; font-size: 16px; line-height: 1.65; }
+.practice-answer:disabled { opacity: .8; background: #f8fafc; color: #475569; }
+.practice-validation { margin: 10px 0 0; color: #b91c1c; font-size: 12px; line-height: 1.6; }
+.practice-validation:empty { display: none; }
+.practice-built { display: flex; flex-wrap: wrap; align-content: center; align-items: center; gap: 8px; min-height: 106px; padding: 16px; border: 2px dashed #c7d2fe; border-radius: 18px; background: #f8faff; }
+.practice-built-placeholder { color: #94a3b8; font-size: 13px; line-height: 1.6; }
+.practice-word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.practice-word { max-width: 100%; padding: 9px 12px; border: 1px solid #e2e8f0; border-bottom: 3px solid #cbd5e1; border-radius: 11px; background: #fff; color: #334155; font-size: 14px; line-height: 1.4; font-weight: 650; overflow-wrap: anywhere; }
+.practice-word:hover:not(:disabled) { border-color: #a5b4fc; color: #4f46e5; }
+.practice-word.is-built { background: #eef2ff; border-color: #c7d2fe; color: #4338ca; }
+.practice-word-bank .practice-word:disabled { opacity: .28; }
+.practice-word-tools { display: flex; gap: 18px; margin-top: 8px; }
+.practice-hint { margin-top: 18px; padding: 12px 14px; border-radius: 13px; background: #fffbeb; color: #92400e; border: 1px solid #fde68a; font-size: 13px; line-height: 1.6; }
+.practice-actions { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+.practice-actions .vm-primary { flex: 1; justify-content: center; }
+.practice-actions .vm-secondary { flex-shrink: 0; }
+.practice-skip { display: block; margin: 10px auto 0; padding: 9px 0; color: #94a3b8; text-align: center; }
+.practice-feedback { margin-top: 22px; padding: 19px; border: 1px solid; border-radius: 19px; }
+.practice-feedback.is-correct { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+.practice-feedback.needs-practice { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+.practice-feedback-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.practice-feedback h4 { margin: 0; font-size: 16px; line-height: 1.45; }
+.practice-feedback p { margin: 9px 0 0; font-size: 12px; line-height: 1.65; }
+.practice-feedback .practice-correct-answer { font-size: 16px; font-weight: 750; line-height: 1.55; overflow-wrap: anywhere; }
+.practice-xp { flex-shrink: 0; font-size: 12px; font-weight: 900; white-space: nowrap; }
+.practice-feedback .practice-feedback-note { opacity: .8; font-size: 11px; }
+.practice-summary { text-align: center; }
+.practice-result-icon { display: grid; place-items: center; width: 76px; height: 76px; margin: 0 auto 20px; border-radius: 50%; background: #eef2ff; color: #4f46e5; font-size: 38px; font-weight: 800; }
+.practice-result-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 24px 0; }
+.practice-result-stats div { padding: 17px 6px; border-radius: 17px; background: #f8fafc; }
+.practice-result-stats strong { display: block; color: #4f46e5; font-size: 26px; line-height: 1.3; font-weight: 900; }
+.practice-result-stats span { display: block; margin-top: 5px; color: #64748b; font-size: 10px; line-height: 1.5; }
+.practice-summary-errors { margin: 24px 0; padding: 18px 20px; border-radius: 19px; background: #fffbeb; text-align: left; }
+.practice-summary-errors h3 { margin: 0 0 10px; color: #92400e; font-size: 14px; }
+.practice-summary-errors ul { margin: 0; padding-left: 18px; color: #78350f; font-size: 13px; line-height: 1.65; }
+.practice-summary-errors li + li { margin-top: 8px; }
+.practice-summary-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+.practice-summary-actions > button { width: 100%; justify-content: center; text-align: center; }
+@media (max-width: 480px) {
+  .practice-filters { grid-template-columns: 1fr; gap: 14px; }
+  .practice-format-grid { gap: 7px; }
+  .practice-format { padding: 10px 8px; font-size: 10px; }
+  .practice-question-text { font-size: 17px; }
+  .practice-choice { padding: 13px 11px; gap: 9px; font-size: 13px; }
+  .practice-actions { flex-wrap: wrap; }
+  .practice-actions .vm-primary { min-width: 100%; }
+  .practice-actions .vm-secondary { width: 100%; justify-content: center; }
+  .practice-round-info { align-items: flex-start; }
+  .practice-built { padding: 12px; }
+  .practice-word { padding: 8px 10px; font-size: 13px; }
+  .practice-result-stats { gap: 6px; }
+  .practice-result-stats strong { font-size: 22px; }
+}
+
+.email-mode-switch { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 20px; justify-content:center; }
+.email-mode-switch .vm-pill[aria-pressed="true"] { background:#4f46e5; border-color:#4f46e5; color:#fff; }
+.email-panel { padding:28px; overflow-wrap:break-word; }
+.email-panel h2 { margin:6px 0 16px; font-size:26px; line-height:1.2; color:#1e293b; font-weight:900; }
+.email-panel h3 { margin:0 0 10px; font-size:18px; color:#1e293b; }
+.email-panel h4 { margin:22px 0 8px; font-size:16px; }
+.email-panel p { line-height:1.6; margin:10px 0; }
+.email-heading { display:flex; align-items:flex-start; gap:12px; justify-content:space-between; flex-wrap:wrap; }
+.email-completed { display:inline-block; color:#166534; background:#f0fdf4; padding:7px 11px; border-radius:14px; font-size:11px; font-weight:800; }
+.email-label { display:block; margin:18px 0 8px; font-weight:800; font-size:13px; color:#475569; }
+.email-panel .vm-select, .email-panel .vm-input { width:100%; max-width:100%; }
+.email-levels { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:20px 0; }
+.email-levels button { padding:12px 6px; border:2px solid #e2e8f0; border-radius:16px; color:#64748b; background:#fff; }
+.email-levels button strong { display:block; font-size:13px; }
+.email-levels button span { display:block; font-size:10px; line-height:1.4; margin-top:3px; }
+.email-levels button[aria-pressed="true"] { color:#4338ca; border-color:#818cf8; background:#eef2ff; }
+.email-brief { padding:20px; border-radius:22px; background:#f8fafc; border:1px solid #e2e8f0; }
+.email-brief ul { margin:14px 0 0; padding-left:20px; color:#475569; }
+.email-brief li { margin:8px 0; font-size:14px; line-height:1.5; }
+.email-bank { margin:16px 0 22px; background:#eef2ff; border-radius:20px; padding:15px 18px; color:#4338ca; }
+.email-bank summary { cursor:pointer; font-size:13px; font-weight:800; }
+.email-bank ul { padding-left:18px; margin:12px 0 0; }
+.email-bank li { margin:8px 0; font-size:14px; line-height:1.5; }
+.email-editor { display:block; min-height:300px; resize:vertical; font-size:16px!important; line-height:1.65; font-family:inherit; }
+.email-draft-meta { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-top:9px; color:#64748b; font-size:11px; }
+.email-draft-meta span:first-child { font-weight:800; color:#4f46e5; }
+.email-check-note { margin-top:18px!important; }
+.email-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.email-actions button { flex:1 1 135px; }
+.email-message { color:#4338ca; font-size:14px; font-weight:700; }
+.email-message:empty { display:none; }
+.email-report { border-top:2px solid #e2e8f0; margin-top:24px; padding-top:24px; }
+.email-report h3:focus { outline:none; }
+.email-checklist { padding:0; margin:18px 0; list-style:none; }
+.email-checklist li { padding:12px 14px; margin:8px 0; border-radius:14px; border:1px solid; font-size:13px; line-height:1.5; }
+.email-found { background:#f0fdf4; color:#166534; border-color:#bbf7d0!important; }
+.email-review { background:#fffbeb; color:#92400e; border-color:#fde68a!important; }
+.email-checklist li span, .email-grammar li span { display:block; margin-top:6px; font-size:12px; font-weight:400; color:#475569; }
+.email-grammar { padding-left:20px; color:#b91c1c; font-size:14px; }
+.email-grammar li { margin:12px 0; line-height:1.5; }
+.email-language-tip { padding:12px 14px; border-radius:14px; background:#fffbeb; color:#92400e; font-size:13px; }
+.email-selfcheck { margin:24px 0 18px; border:1px solid #c7d2fe; border-radius:18px; padding:15px; min-width:0; }
+.email-selfcheck legend { padding:0 6px; font-weight:800; font-size:14px; color:#4338ca; }
+.email-selfcheck label, .email-confirm { display:flex; align-items:flex-start; gap:10px; font-size:13px; line-height:1.6; }
+.email-selfcheck label { margin:12px 0; }
+.email-selfcheck input, .email-confirm input { flex:0 0 18px; width:18px; height:18px; margin:2px 0 0; accent-color:#4f46e5; }
+.email-confirm { margin:18px 0; color:#475569; }
+#email-complete { width:100%; }
+.email-panel button:disabled { opacity:.45; cursor:not-allowed; }
+.email-sample { margin-top:24px; border:2px dashed #c7d2fe; border-radius:22px; padding:20px; background:#f8fafc; }
+.email-sample strong { display:block; margin:14px 0; color:#4338ca; font-size:14px; }
+.email-sample pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font-family:inherit; font-size:15px; line-height:1.7; color:#334155; }
+.email-order-list { list-style:none; padding:0; margin:22px 0; }
+.email-order-list li { display:flex; align-items:center; gap:12px; padding:14px 12px; margin:10px 0; border:2px solid #e2e8f0; border-radius:18px; background:#fff; }
+.email-order-number { display:flex; align-items:center; justify-content:center; flex:0 0 26px; height:26px; border-radius:50%; background:#eef2ff; color:#4f46e5; font-size:12px; font-weight:900; }
+.email-order-list p { flex:1; min-width:0; margin:0; font-size:14px; white-space:pre-wrap; }
+.email-order-controls { display:flex; flex-direction:column; gap:5px; }
+.email-order-controls button { width:32px; height:30px; border:1px solid #c7d2fe; border-radius:9px; background:#eef2ff; color:#4338ca; font-size:18px; font-weight:800; }
+.email-order-feedback { padding:14px; border:1px solid; border-radius:16px; line-height:1.6; font-size:14px; }
+@media(max-width:480px) { .email-panel { padding:20px 16px; } .email-panel h2 { font-size:24px; } .email-brief { padding:16px; } .email-order-list li { gap:8px; padding:12px 8px; } .email-order-list p { font-size:13px; } .email-sample { padding:16px; } .email-actions button { flex-basis:100%; } }
+
+.email-mode-switch .vm-pill { border:1px solid #c7d2fe; }
+
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="shell">
+      <header class="header">
+        <h1>Vocab Master</h1>
+        <div class="subtitle"><span>Deutsch ➔ Englisch: Geschäftsbriefe &amp; E-Mails</span></div>
+      </header>
+
+
+      <div class="vm-stats" aria-label="Lernfortschritt">
+        <span class="vm-stat" id="vm-xp">0 XP</span><span class="vm-stat" id="vm-streak">0 Tage in Folge</span><span class="vm-stat" id="vm-written">0/38 aus dem Gedächtnis</span>
+      </div>
+      <div class="vm-goal"><div class="vm-goal-label"><span>Tagesziel</span><span id="vm-goal-text">0/10 Aufgaben heute</span></div><div class="vm-goal-track"><div id="vm-goal-fill" class="vm-goal-fill"></div></div></div>
+      <nav class="vm-tabs" role="tablist" aria-label="Lernbereiche">
+        <button class="vm-tab" id="tab-cards" type="button" role="tab" aria-controls="cards-pane" data-vm-tab="cards" aria-selected="true">Karteikarten</button>
+        <button class="vm-tab" id="tab-practice" type="button" role="tab" aria-controls="practice-pane" data-vm-tab="practice" aria-selected="false">Übungen</button>
+        <button class="vm-tab" id="tab-email" type="button" role="tab" aria-controls="email-pane" data-vm-tab="email" aria-selected="false">E-Mail schreiben</button>
+      </nav>
+      <div id="cards-pane" class="vm-pane" role="tabpanel" aria-labelledby="tab-cards">
+      <section id="session" aria-label="Mit Karteikarten lernen">
+        <nav id="categories" class="categories" aria-label="Wendungen nach Kategorie filtern"></nav>
+        <div id="review-banner" class="review-banner" hidden>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5a3 3 0 0 0-5.8-1A4 4 0 0 0 3 10a4 4 0 0 0 1 7 4 4 0 0 0 8 1Z"/><path d="M12 5a3 3 0 0 1 5.8-1A4 4 0 0 1 21 10a4 4 0 0 1-1 7 4 4 0 0 1-8 1"/><path d="M8 8c0 2-1 3-3 3M16 8c0 2 1 3 3 3M7 16c2 0 3-1 3-3M17 16c-2 0-3-1-3-3"/></svg>
+          <span>Fehler gezielt wiederholen</span>
+        </div>
+        <div id="progress-track" class="progress-track" role="progressbar" aria-label="Beantwortete Karteikarten" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="dashboard">
+          <div>
+            <span class="progress-label">Fortschritt</span>
+            <div id="progress-count" class="progress-count" aria-label="Aktuelle Karte">
+              <span id="current-number" class="current-number">1</span>
+              <span class="deck-total">/ <span id="deck-total">0</span></span>
+            </div>
+          </div>
+          <div class="counters" role="group" aria-label="Ergebnisse dieser Runde">
+            <div id="learned-counter" class="counter learned" aria-label="Gewusst: 0 Wendungen">
+              <span class="counter-label">Gewusst</span>
+              <span id="learned-value" class="counter-value">0</span>
+            </div>
+            <div id="mistakes-counter" class="counter mistakes" aria-label="Noch unsicher: 0 Wendungen">
+              <span class="counter-label">Unsicher</span>
+              <span id="mistakes-value" class="counter-value">0</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="flashcard" class="flashcard" type="button" aria-label="Englische Übersetzung anzeigen" aria-pressed="false">
+          <span id="card-inner" class="card-inner">
+            <span id="front-face" class="face front">
+              <span id="category-badge" class="badge"></span>
+              <span id="prompt-area" class="phrase-area"><span id="prompt" class="phrase" lang="de"></span></span>
+              <span class="hint">
+                <span class="hint-text">Tippen für die Übersetzung</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.39 5.62"/><path d="M3 4v7h7"/></svg>
+              </span>
+            </span>
+            <span id="back-face" class="face back" aria-hidden="true">
+              <span class="translation-label">Übersetzung</span>
+              <span id="answer-area" class="phrase-area"><span id="answer" class="phrase" lang="en"></span></span>
+            </span>
+          </span>
+        </button>
+
+        <div class="response-buttons" role="group" aria-label="Schätze ein, wie gut du diese Wendung kennst">
+          <button id="dont-know" class="response no" type="button">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg>
+            <span>Noch unsicher</span>
+          </button>
+          <button id="know-it" class="response yes" type="button">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>
+            <span>Gewusst</span>
+          </button>
+        </div>
+        <p id="round-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
+      <section id="summary" class="summary" aria-labelledby="result-title" hidden>
+        <div id="result-icon" class="result-icon" aria-hidden="true"></div>
+        <h2 id="result-title" tabindex="-1">Runde beendet</h2>
+        <p id="result-description"></p>
+        <div class="summary-actions">
+          <button id="review-mistakes" class="action review-action" type="button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.39 5.62"/><path d="M3 4v7h7"/></svg>
+            <span>Fehler wiederholen</span>
+          </button>
+          <button id="new-session" class="action new-action" type="button">
+            <span>Neue Runde</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+          <button id="reset-all" class="reset-action" type="button">Mit allen Wendungen starten</button>
+        </div>
+      </section>
+
+      </div>
+      <section id="practice-pane" class="vm-pane" role="tabpanel" aria-labelledby="tab-practice" hidden></section>
+      <section id="email-pane" class="vm-pane" role="tabpanel" aria-labelledby="tab-email" hidden></section>
+      <details id="vm-progress" class="vm-progress">
+        <summary id="vm-progress-label">Mein Fortschritt</summary>
+        <div class="vm-progress-body">
+          <p><strong>Erkannt</strong> — richtig gelöst in einer Übung mit vorgegebenen Wörtern oder Satzteilen. <strong>Geschrieben</strong> — zweimal ohne Hilfe aus dem Gedächtnis geschrieben. <strong>Angewendet</strong> — von dir nach der Prüfung deiner E-Mail als verwendet markiert.</p>
+          <p>Wiederholungen folgen nach 1, 3, 7 und 14 Tagen. Fehler werden früher wiederholt. Deine Selbsteinschätzung bei den Karteikarten ersetzt keine Schreibübung.</p>
+          <div id="vm-progress-table" class="vm-table-wrap"></div>
+        </div>
+      </details>
+      <p class="vm-footer" id="vm-storage-note">Dein Fortschritt und deine Entwürfe werden in diesem Browser gespeichert.</p>
+    </div>
+  </main>
+  <script>
+    'use strict';
+    const vocabulary = [{"id": 1, "de": "Ich schreibe Ihnen, um …", "en": "I am writing to …", "cat": "Einstieg"}, {"id": 2, "de": "Ich schreibe Ihnen, um Ihnen mitzuteilen, dass …", "en": "I am writing to inform you that …", "cat": "Einstieg"}, {"id": 3, "de": "Ich schreibe Ihnen, um unseren Termin zu bestätigen.", "en": "I am writing to confirm our appointment.", "cat": "Einstieg"}, {"id": 4, "de": "Vielen Dank für Ihre E-Mail. Es freut mich, …", "en": "Thank you for your email. I am pleased to …", "cat": "Bezugnahme"}, {"id": 5, "de": "Vielen Dank für Ihren Brief vom 15. März.", "en": "Thank you for your letter of March 15.", "cat": "Bezugnahme"}, {"id": 6, "de": "Bezugnehmend auf unser gestriges Telefongespräch …", "en": "With reference to our telephone conversation yesterday …", "cat": "Bezugnahme"}, {"id": 7, "de": "Wir wären Ihnen dankbar, wenn Sie … könnten.", "en": "We would be grateful if you could …", "cat": "Bitten"}, {"id": 8, "de": "Könnten Sie mir bitte mitteilen, …", "en": "Could you please let me know …", "cat": "Bitten"}, {"id": 9, "de": "Könnten Sie mir bitte … zusenden?", "en": "Could you please send me …", "cat": "Bitten"}, {"id": 10, "de": "Möchten Sie, dass wir …?", "en": "Would you like us to …?", "cat": "Hilfe anbieten"}, {"id": 11, "de": "Wir würden gerne …", "en": "We would be happy to …", "cat": "Hilfe anbieten"}, {"id": 12, "de": "Unser Unternehmen würde sich freuen, …", "en": "Our company would be pleased to …", "cat": "Hilfe anbieten"}, {"id": 13, "de": "Wir freuen uns, Ihnen mitzuteilen, dass …", "en": "We are pleased to tell you that …", "cat": "Gute Nachrichten"}, {"id": 14, "de": "Wir freuen uns sehr, Ihnen mitteilen zu können, dass …", "en": "We are delighted to inform you that …", "cat": "Gute Nachrichten"}, {"id": 15, "de": "Wir bedauern, Ihnen mitteilen zu müssen, dass …", "en": "We regret to inform you that …", "cat": "Schlechte Nachrichten"}, {"id": 16, "de": "Ich fürchte, es wäre nicht möglich, …", "en": "I'm afraid it would not be possible to …", "cat": "Schlechte Nachrichten"}, {"id": 17, "de": "Leider können wir nicht … / sind wir nicht in der Lage, …", "en": "Unfortunately we cannot / we are unable to …", "cat": "Schlechte Nachrichten"}, {"id": 18, "de": "Nur eine kurze E-Mail, um Sie auf den neuesten Stand zu bringen …", "en": "Just a quick email to update you …", "cat": "Informationen"}, {"id": 19, "de": "Entschuldigen Sie bitte die verspätete Antwort auf …", "en": "Sorry for the delay in responding to …", "cat": "Entschuldigung"}, {"id": 20, "de": "Wir bedauern jegliche Unannehmlichkeiten, die (durch …) entstanden sind.", "en": "We regret any inconvenience caused (by) …", "cat": "Entschuldigung"}, {"id": 21, "de": "Wir möchten uns für die Verzögerung / die Unannehmlichkeiten entschuldigen.", "en": "We would like to apologize for the delay / inconvenience.", "cat": "Entschuldigung"}, {"id": 22, "de": "Gerne können wir ein Treffen vereinbaren, um … zu besprechen.", "en": "We can certainly arrange a meeting to discuss …", "cat": "Termine"}, {"id": 23, "de": "Ich würde vorschlagen, dass wir uns am 9. September 2026 um 10:00 Uhr in meinem Büro treffen.", "en": "I would suggest meeting in my office on 9 September 2026 at 10:00 o'clock.", "cat": "Termine"}, {"id": 24, "de": "Würde Ihnen Montag um 10:00 Uhr passen?", "en": "Would Monday, 10:00 o'clock suit you?", "cat": "Termine"}, {"id": 25, "de": "Falls Ihnen dieser Tag oder diese Uhrzeit nicht passt, geben Sie mir bitte Bescheid.", "en": "If this day or time is not convenient, please let me know.", "cat": "Termine"}, {"id": 26, "de": "Im Anhang finden Sie …", "en": "Please find attached …", "cat": "Dokumente"}, {"id": 27, "de": "Beiliegend finden Sie …", "en": "Please find enclosed …", "cat": "Dokumente"}, {"id": 28, "de": "Ich lege … bei / Ich hänge … an.", "en": "I am enclosing … / I'm attaching …", "cat": "Dokumente"}, {"id": 29, "de": "Im Anhang finden Sie alle erforderlichen Unterlagen.", "en": "You'll find all the necessary documents attached.", "cat": "Dokumente"}, {"id": 30, "de": "Wie gewünscht sende ich Ihnen …", "en": "As requested, I'm sending you …", "cat": "Dokumente"}, {"id": 31, "de": "Bitte lassen Sie uns wissen, wenn wir Ihnen weiterhelfen können.", "en": "If we can be of any further assistance, please let us know.", "cat": "Abschluss"}, {"id": 32, "de": "Falls ich Ihnen in irgendeiner Weise helfen kann, zögern Sie bitte nicht, mich zu kontaktieren.", "en": "If I can help in any way, please do not hesitate to contact me.", "cat": "Abschluss"}, {"id": 33, "de": "Für weitere Einzelheiten …", "en": "For further details …", "cat": "Abschluss"}, {"id": 34, "de": "Ich freue mich auf Ihre Antwort.", "en": "I look forward to your reply.", "cat": "Abschluss"}, {"id": 35, "de": "Ich freue mich darauf, von Ihnen zu hören, …", "en": "Looking forward to hearing from you, …", "cat": "Abschluss"}, {"id": 36, "de": "Ich freue mich auf unser Treffen am 6. Juni 20…", "en": "I look forward to meeting you on 6 June 20…", "cat": "Abschluss"}, {"id": 37, "de": "Anlage / Beilage (in einem Brief)", "en": "enclosure (in a letter)", "cat": "Dokumente"}, {"id": 38, "de": "Anhang (in einer E-Mail)", "en": "attachment (in an email)", "cat": "Dokumente"}];
+    const categories = ["Alle", "Einstieg", "Bezugnahme", "Bitten", "Hilfe anbieten", "Gute Nachrichten", "Schlechte Nachrichten", "Informationen", "Entschuldigung", "Termine", "Dokumente", "Abschluss"];
+
+    const el = Object.fromEntries([
+      'session', 'categories', 'review-banner', 'progress-track', 'progress-fill',
+      'progress-count', 'current-number', 'deck-total', 'learned-counter', 'mistakes-counter',
+      'learned-value', 'mistakes-value', 'flashcard', 'card-inner', 'front-face', 'back-face',
+      'category-badge', 'prompt-area', 'prompt', 'answer-area', 'answer', 'dont-know', 'know-it',
+      'round-status', 'summary', 'result-icon', 'result-title', 'result-description',
+      'review-mistakes', 'new-session', 'reset-all'
+    ].map(id => [id, document.getElementById(id)]));
+
+    const iconStart = '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
+    const trophyIcon = iconStart + '<path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4a1 1 0 0 0-1 1v2a4 4 0 0 0 4 4M17 6h3a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4"/></svg>';
+    const brainIcon = iconStart + '<path d="M12 18V5a3 3 0 0 0-5.8-1A4 4 0 0 0 3 10a4 4 0 0 0 1 7 4 4 0 0 0 8 1Z"/><path d="M12 5a3 3 0 0 1 5.8-1A4 4 0 0 1 21 10a4 4 0 0 1-1 7 4 4 0 0 1-8 1"/><path d="M8 8c0 2-1 3-3 3M16 8c0 2 1 3 3 3M7 16c2 0 3-1 3-3M17 16c-2 0-3-1-3-3"/></svg>';
+
+    let selectedCategory = 'Alle';
+    let currentDeck = [];
+    let currentIndex = 0;
+    let learnedIds = new Set();
+    let failedIds = new Set();
+    let isFlipped = false;
+    let isFinished = false;
+    let isReviewMode = false;
+    let answerLockedUntil = 0;
+    let restoreTransitionFrame = 0;
+
+    function shuffle(items) {
+      const shuffled = [...items];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    function fitText(text, area, maximum) {
+      let size = maximum;
+      text.style.fontSize = size + 'px';
+      while (size > 18 && (text.scrollHeight > area.clientHeight || text.scrollWidth > area.clientWidth)) {
+        size -= 1;
+        text.style.fontSize = size + 'px';
+      }
+    }
+
+    function fitCard() {
+      if (isFinished || !currentDeck.length) return;
+      const maximum = window.innerWidth >= 768 ? 36 : 30;
+      fitText(el.prompt, el['prompt-area'], maximum);
+      fitText(el.answer, el['answer-area'], maximum);
+    }
+
+    function updateFlipState() {
+      el['card-inner'].classList.toggle('flipped', isFlipped);
+      el.flashcard.setAttribute('aria-pressed', String(isFlipped));
+      el['front-face'].setAttribute('aria-hidden', String(isFlipped));
+      el['back-face'].setAttribute('aria-hidden', String(!isFlipped));
+      const item = currentDeck[currentIndex];
+      el.flashcard.setAttribute('aria-label', isFlipped
+        ? item.en + '. Deutsche Wendung anzeigen.'
+        : item.de + '. Englische Übersetzung anzeigen.');
+    }
+
+    function renderCard() {
+      const item = currentDeck[currentIndex];
+      if (!item) return;
+      cancelAnimationFrame(restoreTransitionFrame);
+      el['card-inner'].classList.add('instant');
+      isFlipped = false;
+      updateFlipState();
+      el['category-badge'].textContent = item.cat;
+      el.prompt.textContent = item.de;
+      el.answer.textContent = item.en;
+      el['current-number'].textContent = currentIndex + 1;
+      el['deck-total'].textContent = currentDeck.length;
+      el['progress-count'].setAttribute('aria-label', 'Karte ' + (currentIndex + 1) + ' von ' + currentDeck.length);
+      el['learned-value'].textContent = learnedIds.size;
+      el['mistakes-value'].textContent = failedIds.size;
+      el['learned-counter'].setAttribute('aria-label', 'Gewusst: ' + learnedIds.size + ' Wendungen');
+      el['mistakes-counter'].setAttribute('aria-label', 'Noch unsicher: ' + failedIds.size + ' Wendungen');
+      const progress = currentIndex / currentDeck.length * 100;
+      el['progress-fill'].style.width = progress + '%';
+      el['progress-track'].setAttribute('aria-valuenow', String(Math.round(progress)));
+      el['progress-track'].setAttribute('aria-valuetext', currentIndex + ' von ' + currentDeck.length + ' Wendungen beantwortet');
+      el['round-status'].textContent = 'Karte ' + (currentIndex + 1) + ' von ' + currentDeck.length + '. Gewusst: ' + learnedIds.size + '. Noch unsicher: ' + failedIds.size + '.';
+      fitCard();
+      // Commit the front face before restoring animation, so a new answer never flashes.
+      el['card-inner'].getBoundingClientRect();
+      restoreTransitionFrame = requestAnimationFrame(() => el['card-inner'].classList.remove('instant'));
+    }
+
+    function beginRound(items, review) {
+      currentDeck = shuffle(items);
+      currentIndex = 0;
+      learnedIds = new Set();
+      failedIds = new Set();
+      isFinished = false;
+      isReviewMode = review;
+      answerLockedUntil = 0;
+      el.summary.hidden = true;
+      el.session.hidden = false;
+      el.categories.hidden = isReviewMode;
+      el['review-banner'].hidden = !isReviewMode;
+      for (const button of el.categories.children) {
+        button.setAttribute('aria-pressed', String(button.dataset.category === selectedCategory));
+      }
+      renderCard();
+    }
+
+    function startNewSession(category) {
+      selectedCategory = category;
+      beginRound(category === 'Alle' ? vocabulary : vocabulary.filter(item => item.cat === category), false);
+    }
+
+    function startReviewFailed() {
+      const failedOnes = vocabulary.filter(item => failedIds.has(item.id));
+      if (!failedOnes.length) return;
+      beginRound(failedOnes, true);
+      el.flashcard.focus({ preventScroll: true });
+    }
+
+    function finishRound() {
+      isFinished = true;
+      el.session.hidden = true;
+      el.summary.hidden = false;
+      const perfect = failedIds.size === 0;
+      el['result-icon'].innerHTML = perfect ? trophyIcon : brainIcon;
+      el['result-title'].textContent = perfect ? 'Sehr gut!' : 'Runde beendet';
+      el['result-description'].replaceChildren();
+      if (perfect) {
+        el['result-description'].textContent = "Sehr gut! Du hast alle Wendungen dieser Runde als bekannt markiert.";
+      } else {
+        const good = document.createElement('strong');
+        good.className = 'success-text';
+        good.textContent = learnedIds.size;
+        const bad = document.createElement('strong');
+        bad.className = 'error-text';
+        bad.textContent = failedIds.size;
+        el['result-description'].append("Du hast ", good, ' Wendungen als bekannt markiert. ', bad, ' solltest du noch üben.');
+      }
+      el['review-mistakes'].hidden = perfect;
+      el['result-title'].focus({ preventScroll: true });
+    }
+
+    function handleResponse(isCorrect) {
+      if (isFinished || !currentDeck.length || performance.now() < answerLockedUntil) return;
+      answerLockedUntil = performance.now() + 280;
+      const currentItem = currentDeck[currentIndex];
+      if (window.VM) window.VM.recordCard(currentItem.id, isCorrect);
+      if (isCorrect) {
+        learnedIds.add(currentItem.id);
+        failedIds.delete(currentItem.id);
+      } else {
+        failedIds.add(currentItem.id);
+      }
+      if (currentIndex < currentDeck.length - 1) {
+        currentIndex += 1;
+        renderCard();
+      } else {
+        finishRound();
+      }
+    }
+
+    for (const category of categories) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'category';
+      button.dataset.category = category;
+      button.textContent = category;
+      button.setAttribute('aria-pressed', String(category === selectedCategory));
+      button.setAttribute('aria-label', category === 'Alle' ? 'Alle Wendungen üben' : 'Kategorie üben: ' + category);
+      button.addEventListener('click', () => {
+        if (category !== selectedCategory) startNewSession(category);
+      });
+      el.categories.append(button);
+    }
+
+    el.flashcard.addEventListener('click', () => {
+      if (isFinished) return;
+      isFlipped = !isFlipped;
+      updateFlipState();
+    });
+    el['dont-know'].addEventListener('click', () => handleResponse(false));
+    el['know-it'].addEventListener('click', () => handleResponse(true));
+    el['review-mistakes'].addEventListener('click', startReviewFailed);
+    el['new-session'].addEventListener('click', () => {
+      startNewSession(selectedCategory);
+      el.flashcard.focus({ preventScroll: true });
+    });
+    el['reset-all'].addEventListener('click', () => {
+      startNewSession('Alle');
+      el.flashcard.focus({ preventScroll: true });
+    });
+    window.addEventListener('resize', fitCard);
+    startNewSession('Alle');
+  </script>
+<script>
+const exerciseData = [{"id": 1, "de": "Ich schreibe Ihnen, um mich nach Ihren Dienstleistungen zu erkundigen.", "target": "I am writing to ask about your services.", "cloze": {"text": "I am ___ to ask about your services.", "answers": ["writing"]}, "error": {"text": "I am write to ask about your services.", "reason": "Nach „I am“ brauchst du hier die Form „writing“: „I am writing to …“."}, "informal": "Tell me about your services.", "accepted": ["I'm writing to ask about your services."], "task": "Beginne den Brief: Erkläre, dass du dich nach den Dienstleistungen des Unternehmens erkundigen möchtest."}, {"id": 2, "de": "Ich schreibe Ihnen, um Ihnen mitzuteilen, dass das Treffen abgesagt wurde.", "target": "I am writing to inform you that the meeting has been cancelled.", "cloze": {"text": "I am writing to ___ you that the meeting has been cancelled.", "answers": ["inform"]}, "error": {"text": "I am writing to inform to you that the meeting has been cancelled.", "reason": "Es heißt „inform you“, ohne „to“ zwischen „inform“ und „you“."}, "informal": "The meeting's been cancelled.", "accepted": ["I am writing to inform you that the meeting has been canceled.", "I'm writing to inform you that the meeting has been cancelled."], "task": "Beginne den Brief mit der Mitteilung, dass das Treffen abgesagt wurde."}, {"id": 3, "de": "Ich schreibe Ihnen, um unseren Termin zu bestätigen.", "target": "I am writing to confirm our appointment.", "cloze": {"text": "I am writing to ___ our appointment.", "answers": ["confirm"]}, "error": {"text": "I am writing to confirming our appointment.", "reason": "Hier drückt „to“ eine Absicht aus: „to confirm“. Die Form „confirming“ passt nach diesem „to“ nicht."}, "informal": "Our appointment is confirmed.", "accepted": ["I'm writing to confirm our appointment."], "task": "Bestätige schriftlich einen bereits vereinbarten Termin."}, {"id": 4, "de": "Vielen Dank für Ihre E-Mail. Ich helfe Ihnen gern.", "target": "Thank you for your email. I am pleased to help you.", "cloze": {"text": "Thank you ___ your email. I am pleased to help you.", "answers": ["for"]}, "error": {"text": "Thank you of your email. I am pleased to help you.", "reason": "Wenn du dich für etwas bedankst, verwendest du „for“: „Thank you for your email.“"}, "informal": "Got your email. Happy to help.", "accepted": ["Thank you for your email. I'm pleased to help you."], "task": "Bedanke dich für die erhaltene E-Mail und teile mit, dass du gern hilfst."}, {"id": 5, "de": "Vielen Dank für Ihren Brief vom 15. März.", "target": "Thank you for your letter of March 15.", "cloze": {"text": "Thank you for your ___ of March 15.", "answers": ["letter"]}, "error": {"text": "Thanks you for your letter of March 15.", "reason": "Vor „you“ steht „Thank“ ohne s: „Thank you“. „Thanks“ wird ohne „you“ verwendet."}, "informal": "Thanks for the letter you sent on March 15.", "accepted": ["Thank you for your letter of 15 March."], "task": "Bedanke dich für einen Brief und nenne das Datum: den 15. März."}, {"id": 6, "de": "Bezugnehmend auf unser gestriges Telefongespräch sende ich Ihnen die Einzelheiten.", "target": "With reference to our telephone conversation yesterday, I am sending you the details.", "cloze": {"text": "With reference ___ our telephone conversation yesterday, I am sending you the details.", "answers": ["to"]}, "error": {"text": "With reference of our telephone conversation yesterday, I am sending you the details.", "reason": "Die feste Wendung lautet „with reference to“ und bedeutet „bezugnehmend auf“ oder „im Zusammenhang mit“."}, "informal": "We spoke on the phone yesterday. Here are the details.", "accepted": ["With reference to our telephone conversation yesterday, I'm sending you the details."], "task": "Beziehe dich auf das gestrige Telefongespräch und teile mit, dass du die Einzelheiten sendest."}, {"id": 7, "de": "Wir wären Ihnen dankbar, wenn Sie uns die Unterlagen zusenden könnten.", "target": "We would be grateful if you could send us the documents.", "cloze": {"text": "We would be ___ if you could send us the documents.", "answers": ["grateful"]}, "error": {"text": "We would be grateful if you could to send us the documents.", "reason": "Nach „could“ steht das Verb ohne „to“: „could send“."}, "informal": "Send us the documents.", "accepted": ["We'd be grateful if you could send us the documents."], "task": "Bitte höflich darum, eurem Unternehmen die Unterlagen zuzusenden. Verwende „grateful“."}, {"id": 8, "de": "Könnten Sie mir bitte mitteilen, wann Sie Zeit haben?", "target": "Could you please let me know when you are available?", "cloze": {"text": "Could you please ___ when you are available?", "answers": ["let me know"]}, "error": {"text": "Could you please let me to know when you are available?", "reason": "Nach „let me“ steht das Verb ohne „to“: „let me know“."}, "informal": "Tell me when you're free.", "accepted": ["Could you please let me know when you're available?"], "task": "Frage höflich, wann die andere Person Zeit hat."}, {"id": 9, "de": "Könnten Sie mir bitte die Preisliste zusenden?", "target": "Could you please send me the price list?", "cloze": {"text": "Could you please ___ me the price list?", "answers": ["send"]}, "error": {"text": "Could you please sending me the price list?", "reason": "Nach „could“ steht das Verb in der Grundform: „send“, nicht „sending“."}, "informal": "Send me the price list.", "task": "Bitte höflich darum, dir die Preisliste zuzusenden."}, {"id": 10, "de": "Möchten Sie, dass wir ein Treffen organisieren?", "target": "Would you like us to arrange a meeting?", "cloze": {"text": "Would you like ___ to arrange a meeting?", "answers": ["us"]}, "error": {"text": "Would you like we to arrange a meeting?", "reason": "In der Konstruktion „would you like us to …“ brauchst du die Objektform „us“, nicht „we“."}, "informal": "Want us to set up a meeting?", "task": "Biete an, ein Treffen zu organisieren, und frage, ob die andere Person das möchte."}, {"id": 11, "de": "Wir würden Ihre Fragen gern beantworten.", "target": "We would be happy to answer your questions.", "cloze": {"text": "We would be happy ___ answer your questions.", "answers": ["to"]}, "error": {"text": "We would be happy answer your questions.", "reason": "Nach „happy“ brauchst du vor dem Verb „to“: „happy to answer“."}, "informal": "We can answer your questions.", "accepted": ["We'd be happy to answer your questions."], "task": "Biete freundlich an, die Fragen der Kundin oder des Kunden zu beantworten."}, {"id": 12, "de": "Unser Unternehmen würde sich freuen, mit Ihnen zusammenzuarbeiten.", "target": "Our company would be pleased to work with you.", "cloze": {"text": "Our company would be ___ to work with you.", "answers": ["pleased"]}, "error": {"text": "Our company would is pleased to work with you.", "reason": "Nach „would“ steht „be“, nicht „is“: „would be pleased“."}, "informal": "Our company would like to work with you.", "task": "Drücke das Interesse eures Unternehmens an einer Zusammenarbeit aus."}, {"id": 13, "de": "Wir freuen uns, Ihnen mitzuteilen, dass Ihre Bestellung bereit ist.", "target": "We are pleased to tell you that your order is ready.", "cloze": {"text": "We are pleased to ___ you that your order is ready.", "answers": ["tell"]}, "error": {"text": "We are pleased to tells you that your order is ready.", "reason": "Nach „to“ steht die Grundform „tell“, ohne die Endung s."}, "informal": "Good news! Your order is ready.", "accepted": ["We're pleased to tell you that your order is ready."], "task": "Teile die gute Nachricht mit, dass die Bestellung bereit ist."}, {"id": 14, "de": "Wir freuen uns sehr, Ihnen mitzuteilen, dass Ihr Antrag genehmigt wurde.", "target": "We are delighted to inform you that your application has been approved.", "cloze": {"text": "We are ___ to inform you that your application has been approved.", "answers": ["delighted"]}, "error": {"text": "We are delighted to informing you that your application has been approved.", "reason": "Nach „delighted to“ steht „inform“, nicht „informing“."}, "informal": "Good news! Your application's been approved.", "accepted": ["We're delighted to inform you that your application has been approved."], "task": "Teile die gute Nachricht über einen genehmigten Antrag in einem formellen Stil mit. Verwende „delighted“."}, {"id": 15, "de": "Wir bedauern, Ihnen mitteilen zu müssen, dass sich Ihre Bestellung verzögert hat.", "target": "We regret to inform you that your order has been delayed.", "cloze": {"text": "We ___ to inform you that your order has been delayed.", "answers": ["regret"]}, "error": {"text": "We regrets to inform you that your order has been delayed.", "reason": "Beim Subjekt „we“ steht das Verb „regret“ ohne s."}, "informal": "Bad news: your order has been delayed.", "task": "Teile die unangenehme Nachricht höflich mit: Die Bestellung verzögert sich."}, {"id": 16, "de": "Ich fürchte, es wäre nicht möglich, die Bestellung heute zu liefern.", "target": "I'm afraid it would not be possible to deliver the order today.", "cloze": {"text": "I'm ___ it would not be possible to deliver the order today.", "answers": ["afraid"]}, "error": {"text": "I'm afraid it would not be possible deliver the order today.", "reason": "Nach „possible“ brauchst du vor dem Verb „to“: „possible to deliver“."}, "informal": "We can't deliver the order today.", "accepted": ["I am afraid it would not be possible to deliver the order today.", "I'm afraid it wouldn't be possible to deliver the order today."], "task": "Formuliere die Nachricht, dass die Bestellung heute nicht geliefert werden kann, möglichst höflich. Verwende „afraid“."}, {"id": 17, "de": "Leider können wir keine Rückerstattung anbieten.", "target": "Unfortunately, we are unable to offer a refund.", "cloze": {"text": "Unfortunately, we are ___ to offer a refund.", "answers": ["unable"]}, "error": {"text": "Unfortunately, we are unable offer a refund.", "reason": "In der Konstruktion „unable to offer“ brauchst du „to“ vor dem Verb."}, "informal": "We can't give you a refund.", "accepted": ["Unfortunately, we're unable to offer a refund.", "Unfortunately, we cannot offer a refund."], "task": "Lehne eine Rückerstattung höflich ab. Verwende „Unfortunately“."}, {"id": 18, "de": "Nur eine kurze E-Mail, um Sie über den aktuellen Stand Ihrer Bestellung zu informieren.", "target": "Just a quick email to update you on your order.", "cloze": {"text": "Just a quick email to ___ you on your order.", "answers": ["update"]}, "error": {"text": "Just a quick email to update you of your order.", "reason": "Für das Thema einer Aktualisierung verwendest du „update someone on something“: „update you on your order“."}, "informal": "Here's the latest news about your order.", "accepted": ["Just a quick email to update you about your order."], "task": "Leite eine kurze E-Mail mit Neuigkeiten zur Bestellung ein."}, {"id": 19, "de": "Entschuldigung für die Verzögerung bei der Beantwortung Ihrer E-Mail.", "target": "Sorry for the delay in responding to your email.", "cloze": {"text": "Sorry for the delay in ___ to your email.", "answers": ["responding"]}, "error": {"text": "Sorry for the delay in respond to your email.", "reason": "Nach der Präposition „in“ brauchst du hier die Form „responding“: „delay in responding“."}, "informal": "Sorry I answered your email late.", "task": "Entschuldige dich für die verspätete Antwort auf eine E-Mail."}, {"id": 20, "de": "Wir bedauern etwaige Unannehmlichkeiten, die durch die Verzögerung entstanden sind.", "target": "We regret any inconvenience caused by the delay.", "cloze": {"text": "We regret any inconvenience ___ by the delay.", "answers": ["caused"]}, "error": {"text": "We regret any inconvenience causing by the delay.", "reason": "Die Unannehmlichkeiten wurden durch die Verzögerung verursacht. Deshalb heißt es „caused by“, nicht „causing by“."}, "informal": "Sorry about the problems the delay caused.", "task": "Drücke dein Bedauern über die Unannehmlichkeiten aus, die durch die Verzögerung entstanden sind."}, {"id": 21, "de": "Wir möchten uns für die Verzögerung entschuldigen.", "target": "We would like to apologize for the delay.", "cloze": {"text": "We would like to apologize ___ the delay.", "answers": ["for"]}, "error": {"text": "We would like to apologize of the delay.", "reason": "Wenn du dich für etwas entschuldigst, verwendest du „for“: „apologize for the delay“."}, "informal": "We're sorry about the delay.", "accepted": ["We would like to apologise for the delay.", "We'd like to apologize for the delay.", "We'd like to apologise for the delay."], "task": "Entschuldige dich im Namen des Unternehmens in einem formellen Stil für die Verzögerung."}, {"id": 22, "de": "Wir können selbstverständlich ein Treffen vereinbaren, um Ihren Vorschlag zu besprechen.", "target": "We can certainly arrange a meeting to discuss your proposal.", "cloze": {"text": "We can certainly ___ a meeting to discuss your proposal.", "answers": ["arrange"]}, "error": {"text": "We can certainly arrange a meeting to discuss about your proposal.", "reason": "Nach „discuss“ folgt ein direktes Objekt: „discuss your proposal“, ohne „about“."}, "informal": "Let's meet and talk about your proposal.", "task": "Biete an, ein Treffen zur Besprechung des Vorschlags zu organisieren."}, {"id": 23, "de": "Ich würde vorschlagen, dass wir uns am Montag um 10:00 Uhr in meinem Büro treffen.", "target": "I would suggest meeting in my office on Monday at 10:00.", "cloze": {"text": "I would suggest ___ in my office on Monday at 10:00.", "answers": ["meeting"]}, "error": {"text": "I would suggest to meet in my office on Monday at 10:00.", "reason": "Nach „suggest“ brauchst du hier die Form „meeting“: „suggest meeting“, nicht „suggest to meet“."}, "informal": "Let's meet in my office on Monday at 10:00.", "accepted": ["I'd suggest meeting in my office on Monday at 10:00.", "I would suggest meeting in my office on Monday at 10 a.m."], "task": "Schlage ein Treffen in deinem Büro am Montag um 10:00 Uhr vor. Verwende „suggest“."}, {"id": 24, "de": "Würde Ihnen Montag um 10:00 Uhr passen?", "target": "Would Monday at 10:00 suit you?", "cloze": {"text": "Would Monday at 10:00 ___ you?", "answers": ["suit"]}, "error": {"text": "Would Monday at 10:00 suits you?", "reason": "Nach „would“ steht die Grundform „suit“, ohne s."}, "informal": "Does Monday at 10:00 work for you?", "accepted": ["Would Monday at 10 a.m. suit you?"], "task": "Frage, ob ein Treffen am Montag um 10:00 Uhr für die andere Person passt."}, {"id": 25, "de": "Falls Ihnen dieser Tag oder diese Uhrzeit nicht passt, geben Sie mir bitte Bescheid.", "target": "If this day or time is not convenient, please let me know.", "cloze": {"text": "If this day or time is not ___, please let me know.", "answers": ["convenient"]}, "error": {"text": "If this day or time is not convenience, please let me know.", "reason": "Du brauchst das Adjektiv „convenient“ im Sinne von „passend“. „Convenience“ ist ein Substantiv."}, "informal": "Tell me if the day or time doesn't work for you.", "accepted": ["If this day or time isn't convenient, please let me know."], "task": "Bitte um Rückmeldung, falls der vorgeschlagene Tag oder die Uhrzeit nicht passt."}, {"id": 26, "de": "Im Anhang finden Sie die angeforderten Unterlagen.", "target": "Please find attached the requested documents.", "cloze": {"text": "Please find ___ the requested documents.", "answers": ["attached"]}, "error": {"text": "Please find attach the requested documents.", "reason": "In dieser Konstruktion brauchst du die Form „attached“: „Please find attached …“."}, "informal": "Here are the documents you asked for.", "accepted": ["Please find the requested documents attached."], "task": "Teile mit, dass die angeforderten Unterlagen der E-Mail beigefügt sind. Verwende „Please find attached“."}, {"id": 27, "de": "Als Anlage zu diesem Brief finden Sie den unterschriebenen Vertrag.", "target": "Please find enclosed the signed contract.", "cloze": {"text": "Please find ___ the signed contract.", "answers": ["enclosed"]}, "error": {"text": "Please find enclose the signed contract.", "reason": "Für eine Anlage zu einem Brief auf Papier verwendest du „enclosed“: „Please find enclosed …“."}, "informal": "The signed contract is in the envelope.", "accepted": ["Please find the signed contract enclosed."], "task": "Teile mit, dass der unterschriebene Vertrag dem Brief im Umschlag beiliegt."}, {"id": 28, "de": "Ich füge dieser E-Mail die Tagesordnung bei.", "target": "I'm attaching the agenda to this email.", "cloze": {"text": "I'm ___ the agenda to this email.", "answers": ["attaching"]}, "error": {"text": "I'm attach the agenda to this email.", "reason": "Nach „I am“ brauchst du hier die Form „attaching“: „I am attaching“."}, "informal": "Here's the agenda as an email attachment.", "accepted": ["I am attaching the agenda to this email."], "task": "Teile mit, dass du dieser E-Mail die Tagesordnung für das Treffen beifügst."}, {"id": 29, "de": "Alle erforderlichen Unterlagen finden Sie im Anhang.", "target": "You'll find all the necessary documents attached.", "cloze": {"text": "You'll find all the necessary documents ___.", "answers": ["attached"]}, "error": {"text": "You'll find all the necessary documents attaching.", "reason": "Die Unterlagen sind beigefügt. Deshalb brauchst du „attached“, nicht „attaching“."}, "informal": "All the documents you need are attached.", "accepted": ["You will find all the necessary documents attached."], "task": "Teile mit, dass alle erforderlichen Unterlagen im Anhang zu finden sind."}, {"id": 30, "de": "Wie gewünscht sende ich Ihnen die Preisliste.", "target": "As requested, I'm sending you the price list.", "cloze": {"text": "As ___, I'm sending you the price list.", "answers": ["requested"]}, "error": {"text": "As request, I'm sending you the price list.", "reason": "Die feste Einleitung lautet „As requested“ und bedeutet „wie gewünscht“ oder „auf Ihre Anfrage hin“."}, "informal": "You asked for the price list, so here it is.", "accepted": ["As requested, I am sending you the price list."], "task": "Beziehe dich auf die Bitte der anderen Person und teile mit, dass du die Preisliste sendest."}, {"id": 31, "de": "Falls wir Ihnen weiterhelfen können, geben Sie uns bitte Bescheid.", "target": "If we can be of any further assistance, please let us know.", "cloze": {"text": "If we can be of any further ___, please let us know.", "answers": ["assistance"]}, "error": {"text": "If we can be of any further assist, please let us know.", "reason": "Nach „further“ brauchst du hier das Substantiv „assistance“ für „Hilfe“, nicht das Verb „assist“."}, "informal": "Tell us if you need more help.", "task": "Beende den Brief mit dem Angebot weiterer Unterstützung im Namen des Unternehmens."}, {"id": 32, "de": "Falls ich Ihnen in irgendeiner Weise helfen kann, zögern Sie bitte nicht, mich zu kontaktieren.", "target": "If I can help in any way, please do not hesitate to contact me.", "cloze": {"text": "If I can help in any way, please do not ___ to contact me.", "answers": ["hesitate"]}, "error": {"text": "If I can help in any way, please do not hesitate contact me.", "reason": "Nach „hesitate“ brauchst du vor dem Verb „to“: „hesitate to contact“."}, "informal": "Contact me if you need any help.", "accepted": ["If I can help in any way, please don't hesitate to contact me."], "task": "Biete am Ende des Briefes an, dass man dich bei Fragen oder weiterem Hilfebedarf kontaktieren kann."}, {"id": 33, "de": "Für weitere Einzelheiten wenden Sie sich bitte an unser Büro.", "target": "For further details, please contact our office.", "cloze": {"text": "For ___ details, please contact our office.", "answers": ["further"]}, "error": {"text": "For further details, please contacting our office.", "reason": "Bei dieser höflichen Aufforderung steht nach „please“ die Grundform „contact“."}, "informal": "Ask our office if you want more information.", "task": "Erkläre, an wen man sich für weitere Einzelheiten wenden kann."}, {"id": 34, "de": "Ich freue mich auf Ihre Antwort.", "target": "I look forward to your reply.", "cloze": {"text": "I look forward ___ your reply.", "answers": ["to"]}, "error": {"text": "I look forward for your reply.", "reason": "Die feste Wendung lautet „look forward to“, nicht „look forward for“."}, "informal": "I hope you reply soon.", "task": "Beende den Brief höflich, indem du ausdrückst, dass du dich auf eine Antwort freust. Verwende „reply“."}, {"id": 35, "de": "Ich freue mich darauf, von Ihnen zu hören.", "target": "Looking forward to hearing from you.", "cloze": {"text": "Looking forward to ___ from you.", "answers": ["hearing"]}, "error": {"text": "Looking forward to hear from you.", "reason": "In „look forward to“ ist „to“ eine Präposition. Danach brauchst du die Form „hearing“."}, "informal": "Hope to hear from you soon.", "task": "Verwende zum Abschluss eine Formulierung mit „Looking forward“, um auszudrücken, dass du dich auf eine Antwort freust."}, {"id": 36, "de": "Ich freue mich darauf, Sie am Montag zu treffen.", "target": "I look forward to meeting you on Monday.", "cloze": {"text": "I look forward to ___ you on Monday.", "answers": ["meeting"]}, "error": {"text": "I look forward to meet you on Monday.", "reason": "In der Konstruktion „look forward to“ verwendest du die Form „meeting“, nicht „meet“."}, "informal": "I'm excited to see you on Monday.", "task": "Beende den Brief, indem du ausdrückst, dass du dich auf das Treffen am Montag freust. Verwende „I look forward“."}, {"id": 37, "de": "Anlage zu einem Brief auf Papier.", "target": "enclosure", "cloze": {"text": "___", "answers": ["enclosure"]}, "error": {"text": "attachment", "reason": "Hier geht es um einen Brief auf Papier: Ein Dokument im Umschlag heißt „enclosure“. „Attachment“ bezieht sich hier auf eine E-Mail."}, "task": "Wie heißt ein Dokument, das einem Brief im Umschlag beiliegt? Antworte mit einem englischen Wort."}, {"id": 38, "de": "Anhang einer E-Mail.", "target": "attachment", "cloze": {"text": "___", "answers": ["attachment"]}, "error": {"text": "enclosure", "reason": "Eine Datei, die einer E-Mail beigefügt ist, heißt „attachment“. „Enclosure“ bezieht sich in diesem Lernmaterial auf einen Brief auf Papier."}, "task": "Wie heißt eine Datei, die einer E-Mail beigefügt ist? Antworte mit einem englischen Wort."}];
+(function () {
+  'use strict';
+  const KEY = 'vocab-master-business-v2';
+  const ids = new Set(vocabulary.map(x => x.id));
+  const empty = () => ({version:2,xp:0,days:{},records:{},missions:{},drafts:{},dailyXP:{}});
+  const baseRecord = () => ({recognize:0,write:0,applied:0,due:0,attempts:0,mistakes:0,stage:0,seen:0});
+  const number = value => Number.isFinite(Number(value)) ? Math.max(0,Number(value)) : 0;
+  let state = empty();
+  let storageWorks = true;
+  let activeTab = 'cards';
+  function dayKey(date = new Date()) {
+    return date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
+  }
+  function previousDay(key) {
+    const [y,m,d] = key.split('-').map(Number);
+    return dayKey(new Date(y,m-1,d-1,12));
+  }
+  try {
+    const raw = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (raw && raw.version === 2) {
+      state.xp = number(raw.xp);
+      for (const k of ['days','missions','drafts','dailyXP']) {
+        if (raw[k] && typeof raw[k] === 'object' && !Array.isArray(raw[k])) state[k] = raw[k];
+      }
+      for (const id of ids) {
+        const r = raw.records && raw.records[id];
+        if (r && typeof r === 'object') {
+          const clean = baseRecord();
+          for (const key of Object.keys(clean)) clean[key] = number(r[key]);
+          state.records[id] = clean;
+        }
+      }
+    }
+    localStorage.setItem(KEY, JSON.stringify(state));
+  } catch (_) { storageWorks = false; }
+  function persist(refresh = true) {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); storageWorks = true; }
+    catch (_) { storageWorks = false; }
+    if (refresh) updateStats();
+  }
+  function escape(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  }
+  function normalize(value) {
+    return String(value || '').normalize('NFKC').toLowerCase()
+      .replace(/[’‘`]/g,"'")
+      .replace(/\bi'm\b/g,'i am').replace(/\bwe're\b/g,'we are')
+      .replace(/\byou're\b/g,'you are').replace(/\bthey're\b/g,'they are')
+      .replace(/\bit's\b/g,'it is').replace(/\bi've\b/g,'i have')
+      .replace(/\bwe've\b/g,'we have').replace(/\byou'll\b/g,'you will')
+      .replace(/\bi'll\b/g,'i will').replace(/\bcan't\b/g,'cannot')
+      .replace(/\bwon't\b/g,'will not').replace(/\bdon't\b/g,'do not')
+      .replace(/\bwe'd(?=\s+(?:be|like)\b)/g,'we would')
+      .replace(/\be[ -]?mail\b/g,'email')
+      .replace(/\bapologise\b/g,'apologize').replace(/\bcanceled\b/g,'cancelled')
+      .replace(/[.,!?;:"'()[\]…]/g,' ').replace(/[–—-]/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+  function shuffleList(items) {
+    const out = [...items];
+    for (let i=out.length-1;i>0;i--) {const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}
+    return out;
+  }
+  function getProgress(id) { return Object.assign(baseRecord(),state.records[id] || {}); }
+  function isDue(id) { const r=getProgress(id);return r.attempts>0 && r.due<=Date.now(); }
+  function activeDay() {const k=dayKey();state.days[k]=number(state.days[k])+1;}
+  function recordResult(id, result) {
+    id=Number(id); if (!ids.has(id)) return 0;
+    const r=getProgress(id);r.attempts++;r.seen++;
+    let xp=0;
+    if (result.correct) {
+      if (!result.hinted) {
+        if(result.skill==='write')r.write++;else r.recognize++;
+        r.stage=Math.min(4,r.stage+1);
+        r.due=Date.now()+[1,3,7,14][r.stage-1]*86400000;
+      } else {r.due=Date.now()+86400000;}
+      if (result.awardXP !== false) {
+        const k=dayKey()+':'+id;
+        const used=number(state.dailyXP[k]);
+        xp=Math.min(result.hinted?3:(result.skill==='write'?10:5),Math.max(0,40-used));
+        state.dailyXP[k]=used+xp;
+      }
+    } else {r.mistakes++;r.stage=0;r.due=Date.now();}
+    state.records[id]=r;state.xp+=xp;activeDay();persist();return xp;
+  }
+  function recordCard(id, correct) {
+    const r=getProgress(id);r.seen++;
+    if(!correct){r.due=Date.now();r.attempts++;r.mistakes++;}
+    state.records[id]=r;persist();
+  }
+  function getDraft(key) { const d=state.drafts[key];return d&&typeof d==='object'?JSON.parse(JSON.stringify(d)):null; }
+  function saveDraft(key, draft) {
+    if(typeof key!=='string'||key.length>180)return;
+    state.drafts[key]=JSON.parse(JSON.stringify(draft));persist(false);
+    const note=document.getElementById('vm-storage-note');
+    if(note)note.textContent=storageWorks?'Dein Fortschritt und deine Entwürfe werden in diesem Browser gespeichert.':'Speichern ist in diesem Browser nicht möglich. Lade deine E-Mail herunter, bevor du den Tab schließt.';
+  }
+  function getMission(id) {return state.missions[id]||null;}
+  function markMission(id, details) {
+    const old=state.missions[id];
+    const added=new Set((old&&old.phraseIds)||[]);
+    for(const raw of (details.phraseIds||[])) {
+      const pid=Number(raw); if(!ids.has(pid)||added.has(pid))continue;
+      const r=getProgress(pid);r.applied++;state.records[pid]=r;added.add(pid);
+    }
+    state.missions[id]=Object.assign({},details,{done:true,date:dayKey(),phraseIds:[...added]});
+    const xp=old&&old.done?0:(String(id).startsWith('arrange:')?15:40);
+    state.xp+=xp;if(xp)activeDay();persist();return xp;
+  }
+  function getStats() {
+    let recognized=0,written=0,applied=0,mastered=0,due=0,seen=0;
+    for(const id of ids) {const r=getProgress(id);if(r.recognize>0)recognized++;if(r.write>=2)written++;if(r.applied>0)applied++;if(r.write>=2&&r.applied>0)mastered++;if(isDue(id))due++;if(r.seen>0)seen++;}
+    let streak=0;let k=dayKey();if(!state.days[k])k=previousDay(k);
+    while(number(state.days[k])>0&&streak<3660){streak++;k=previousDay(k);}
+    return {xp:state.xp,today:number(state.days[dayKey()]),streak,recognized,written,applied,mastered,due,seen,total:ids.size,missions:Object.values(state.missions).filter(x=>x&&x.done).length};
+  }
+  function updateStats() {
+    const stats=getStats();
+    const xp=document.getElementById('vm-xp');if(!xp)return;
+    xp.textContent=stats.xp+' XP';
+    document.getElementById('vm-streak').textContent=stats.streak+(stats.streak===1?' Tag in Folge':' Tage in Folge');
+    document.getElementById('vm-written').textContent=stats.written+'/'+stats.total+' aus dem Gedächtnis';
+    document.getElementById('vm-goal-text').textContent=Math.min(stats.today,10)+'/10 Aufgaben heute';
+    document.getElementById('vm-goal-fill').style.width=Math.min(100,stats.today*10)+'%';
+    document.getElementById('vm-progress-label').textContent='Mein Fortschritt · '+stats.due+' zur Wiederholung';
+    const note=document.getElementById('vm-storage-note');
+    note.textContent=storageWorks?'Dein Fortschritt und deine Entwürfe werden in diesem Browser gespeichert.':'Speichern ist in diesem Browser nicht möglich. Deine Daten gehen beim Neuladen oder Schließen des Tabs verloren.';
+    if(document.getElementById('vm-progress').open)renderProgress();
+  }
+  function renderProgress() {
+    const rows=vocabulary.map(item=>{
+      const r=getProgress(item.id);
+      const due=r.attempts?(isDue(item.id)?'Jetzt':new Date(r.due).toLocaleDateString('de-DE',{day:'numeric',month:'short'})):'Nach der ersten Aufgabe';
+      return '<tr><td><span lang="en">'+escape(item.en)+'</span><small>'+escape(item.cat)+'</small></td><td>'+(r.recognize?'✓':'—')+'</td><td>'+Math.min(2,r.write)+'/2</td><td>'+(r.applied?'✓':'—')+'</td><td>'+due+'</td></tr>';
+    }).join('');
+    document.getElementById('vm-progress-table').innerHTML='<table><thead><tr><th>Wendung</th><th>Erkannt</th><th>Geschrieben</th><th>Angewendet</th><th>Wiederholung</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+  function showTab(name) {
+    activeTab=name;
+    for(const tab of document.querySelectorAll('[data-vm-tab]'))tab.setAttribute('aria-selected',String(tab.dataset.vmTab===name));
+    for(const pane of document.querySelectorAll('.vm-pane'))pane.hidden=pane.id!==name+'-pane';
+    if(name==='cards')requestAnimationFrame(fitCard);
+    if(name==='practice')window.VMPractice.onShow();
+    if(name==='email')window.VMEmail.onShow();
+    updateStats();
+  }
+  const VM={vocabulary,exercises:exerciseData,categories,escape,shuffle:shuffleList,normalize,getProgress,isDue,recordResult,recordCard,getStats,getDraft,saveDraft,getMission,markMission};
+  window.VM=VM;
+  window.initTrainer=function(){
+    window.VMPractice.init(document.getElementById('practice-pane'),VM);
+    window.VMEmail.init(document.getElementById('email-pane'),VM);
+    document.querySelectorAll('[data-vm-tab]').forEach(button=>button.addEventListener('click',()=>showTab(button.dataset.vmTab)));
+    document.querySelector('.vm-tabs').addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      event.preventDefault();
+      const tabs=[...document.querySelectorAll('[data-vm-tab]')];
+      const old=tabs.findIndex(button=>button.dataset.vmTab===activeTab);
+      const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(old+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+      tabs[next].focus();showTab(tabs[next].dataset.vmTab);
+    });
+    document.getElementById('vm-progress').addEventListener('toggle',()=>{if(document.getElementById('vm-progress').open)renderProgress();});
+    showTab('cards');
+  };
+}());
+
+(function () {
+  'use strict';
+
+  let host;
+  let app;
+  let lesson = null;
+  let screen = 'setup';
+  let config = { category: 'Alle', type: 'mixed', dueOnly: false };
+  let state = null;
+  const types = {
+    context: { name: 'Passende Formulierung', label: 'Wähle die passende Formulierung', short: 'Passende Formulierung', icon: '01' },
+    build: { name: 'Satzbau', label: 'Setze den Satz zusammen', short: 'Wortreihenfolge', icon: '02' },
+    cloze: { name: 'Lückentext', label: 'Ergänze die Lücke', short: 'Lückentexte', icon: '03' },
+    recall: { name: 'Aus dem Gedächtnis', label: 'Schreibe aus dem Gedächtnis', short: 'Auswendig schreiben', icon: '04' },
+    fix: { name: 'Fehlerkorrektur', label: 'Verbessere den Fehler', short: 'Fehler korrigieren', icon: '05' },
+    formal: { name: 'Geschäftlicher Stil', label: 'Formuliere den Satz für eine E-Mail um', short: 'Geschäftlicher Stil', icon: '06' }
+  };
+  const cycle = ['context', 'build', 'cloze', 'fix', 'recall', 'formal'];
+  const escape = value => app.escape(String(value == null ? '' : value));
+  const byId = id => app.vocabulary.find(item => item.id === Number(id));
+  const normalized = value => app.normalize(String(value || ''));
+  const lookup = id => app.exercises.find(item => item.id === Number(id));
+  const button = (action, label, extra = '', css = 'vm-secondary') =>
+    '<button type="button" class="' + css + '" data-practice-action="' + action + '" ' + extra + '>' + label + '</button>';
+
+  function eligible(item, type) {
+    if (!item || !byId(item.id) || !item.target) return false;
+    if (type === 'formal') return Boolean(item.informal);
+    if (type === 'cloze') return Boolean(item.cloze && item.cloze.text && item.cloze.answers && item.cloze.answers.length);
+    if (type === 'fix') return Boolean(item.error && item.error.text);
+    return true;
+  }
+
+  function pool() {
+    return app.exercises.filter(item =>
+      eligible(item, config.type) &&
+      (config.category === 'Alle' || byId(item.id).cat === config.category) &&
+      (!config.dueOnly || app.isDue(item.id))
+    );
+  }
+
+  function setup() {
+    screen = 'setup';
+    lesson = null;
+    state = null;
+    host.innerHTML = '<div class="vm-panel practice-setup">' +
+      '<div class="practice-kicker">KURZE LEKTIONEN · FORMULIERUNGEN FÜR E-MAILS</div>' +
+      '<h2 class="practice-heading">Übungen</h2>' +
+      '<p class="practice-intro">Von der passenden Formulierung zur eigenen E-Mail. Jede Lektion enthält bis zu 10 Aufgaben; schwierige Ausdrücke werden wiederholt.</p>' +
+      '<div class="practice-format-grid">' + Object.keys(types).map(key =>
+        '<div class="practice-format"><span class="practice-format-number">' + types[key].icon + '</span><span>' + types[key].short + '</span></div>'
+      ).join('') + '</div>' +
+      '<div class="practice-filters">' +
+        '<label for="practice-category">Kategorie<select id="practice-category" class="vm-select">' + app.categories.map(category =>
+          '<option value="' + escape(category) + '"' + (category === config.category ? ' selected' : '') + '>' + escape(category === 'Alle' ? 'Alle Kategorien' : category) + '</option>'
+        ).join('') + '</select></label>' +
+        '<label for="practice-type">Aufgabentyp<select id="practice-type" class="vm-select"><option value="mixed"' + (config.type === 'mixed' ? ' selected' : '') + '>Gemischte Lektion · Alle Aufgabentypen</option>' +
+        Object.keys(types).map(key => '<option value="' + key + '"' + (key === config.type ? ' selected' : '') + '>' + types[key].short + '</option>').join('') + '</select></label>' +
+      '</div>' +
+      '<label class="practice-due-toggle"><input id="practice-due" type="checkbox"' + (config.dueOnly ? ' checked' : '') + '><span>Nur Formulierungen, die zur Wiederholung anstehen</span></label>' +
+      '<p id="practice-pool-info" class="practice-pool-info" aria-live="polite"></p>' +
+      button('start', 'Lektion starten <span aria-hidden="true">→</span>', 'id="practice-start"', 'vm-primary practice-start') +
+      '<p class="practice-small-note">Bei Schreibaufgaben übst du die vorgegebenen Formulierungen. Groß- und Kleinschreibung, Satzzeichen und zusätzliche Leerzeichen beeinflussen die Bewertung nicht.</p>' +
+      '</div>';
+    updatePoolInfo();
+  }
+
+  function updatePoolInfo() {
+    const count = pool().length;
+    const info = host.querySelector('#practice-pool-info');
+    const start = host.querySelector('#practice-start');
+    if (!info || !start) return;
+    start.disabled = count === 0;
+    info.textContent = count ? 'Verfügbare Formulierungen: ' + count + ' · In dieser Lektion: ' + Math.min(10, count) :
+      (config.dueOnly ? 'Mit diesen Filtern steht gerade keine Wiederholung an. Entferne das Häkchen, um neue Formulierungen zu lernen.' : 'Dieser Aufgabentyp ist für die gewählte Kategorie nicht verfügbar. Wähle eine gemischte Lektion oder einen anderen Aufgabentyp.');
+  }
+
+  function chooseType(item, index) {
+    if (config.type !== 'mixed') return config.type;
+    const progress = app.getProgress(item.id);
+    let candidate = cycle[index % cycle.length];
+    // Later lessons increasingly require independent production.
+    if ((Number(progress.recognize) >= 2 || Number(progress.write) > 0) && (candidate === 'context' || candidate === 'build')) candidate = 'recall';
+    if (!eligible(item, candidate)) candidate = 'recall';
+    return candidate;
+  }
+
+  function startLesson(ids) {
+    const available = ids ? app.exercises.filter(item => ids.includes(item.id) && eligible(item, config.type)) : pool();
+    if (!available.length) { setup(); return; }
+    const selection = app.shuffle(available).slice(0, 10);
+    const queue = selection.map((item, index) => ({ id: item.id, type: chooseType(item, index), repeat: false }));
+    lesson = {
+      queue: queue,
+      cursor: 0,
+      baseSize: queue.length,
+      retryCount: {},
+      attempts: [],
+      unresolved: new Set(),
+      recorded: new Set(),
+      xp: 0,
+      reviewOnly: Boolean(ids)
+    };
+    screen = 'lesson';
+    nextQuestion();
+  }
+
+  function nextQuestion() {
+    if (lesson.cursor >= lesson.queue.length) { finish(); return; }
+    const q = lesson.queue[lesson.cursor];
+    const item = lookup(q.id);
+    state = { graded: false, correct: false, skipped: false, hinted: false, hintLevel: 0, value: '', selected: null, built: [], tokens: [], choices: [], awarded: 0, cloze: null };
+    if (q.type === 'cloze') state.cloze = makeCloze(item);
+    if (q.type === 'build') {
+      state.tokens = app.shuffle(item.target.split(/\s+/).filter(Boolean).map((word, id) => ({ word, id })));
+    }
+    if (q.type === 'context') {
+      const category = byId(q.id).cat;
+      const candidates = app.exercises.filter(other => other.id !== q.id && byId(other.id).cat !== category && normalized(other.target) !== normalized(item.target));
+      const distractors = app.shuffle(candidates).slice(0, 2);
+      state.choices = app.shuffle([item, ...distractors]);
+    }
+    renderQuestion();
+    const heading = host.querySelector('#practice-question-heading');
+    if (heading) heading.focus({ preventScroll: true });
+  }
+
+  function opening(item) {
+    const words = item.target.split(/\s+/).filter(Boolean);
+    if (words.length < 4) return '';
+    return words.slice(0, Math.min(4, Math.floor(words.length / 2))).join(' ') + ' …';
+  }
+
+  function makeCloze(item) {
+    const words = item.target.split(/\s+/).filter(Boolean);
+    const recognized = Number(app.getProgress(item.id).recognize) || 0;
+    if (words.length >= 7 && recognized >= 1) {
+      const count = recognized >= 3 ? 5 : 3;
+      return {
+        text: '___ ' + words.slice(count).join(' '),
+        answers: [words.slice(0, count).join(' ')],
+        label: 'Stufe ' + (count === 3 ? '2' : '3') + '/3 · ergänze die ersten ' + count + ' Wörter'
+      };
+    }
+    return {
+      text: item.cloze.text,
+      answers: [...item.cloze.answers],
+      label: words.length >= 7 ? 'Stufe 1/3 · Schlüsselwörter' : 'Schlüsselwörter'
+    };
+  }
+
+  function hintText(item, q) {
+    if (q.type === 'context') return 'Kategorie: ' + byId(item.id).cat;
+    const answer = q.type === 'cloze' ? state.cloze.answers[0] : item.target;
+    const words = answer.split(/\s+/).filter(Boolean);
+    if (words.length === 1) return 'Wortanfang: ' + answer.slice(0, state.hintLevel === 1 ? 1 : Math.min(3, answer.length - 1)) + '…';
+    const count = state.hintLevel === 1 ? 1 : Math.min(3, words.length - 1);
+    return 'Satzanfang: ' + words.slice(0, count).join(' ') + ' …';
+  }
+
+  function promptHtml(item, q) {
+    if (q.type === 'context') {
+      return '<p class="practice-question-text">' + escape(item.task) + '</p>' +
+        '<p class="practice-translation">Drücke diesen Gedanken aus: ' + escape(item.de) + '</p>' +
+        '<fieldset class="practice-choices"><legend class="sr-only">Wähle die passende Formulierung für diese Situation</legend>' +
+        state.choices.map((choice, index) => '<button type="button" class="practice-choice' + (state.selected === index ? ' is-selected' : '') + '" data-practice-action="choose" data-choice="' + index + '" aria-pressed="' + (state.selected === index) + '"' + (state.graded ? ' disabled' : '') + '><span class="practice-choice-letter" aria-hidden="true">' + String.fromCharCode(65 + index) + '</span><span lang="en">' + escape(choice.target) + '</span></button>').join('') + '</fieldset>';
+    }
+    if (q.type === 'build') {
+      return '<p class="practice-question-text">' + escape(item.de) + '</p>' +
+        '<p class="practice-translation">Klicke die Wörter in der richtigen Reihenfolge an. Klicke ein ausgewähltes Wort erneut an, um es zurückzulegen.</p>' +
+        '<div class="practice-built" aria-label="Dein Satz" aria-live="polite">' +
+        (state.built.length ? state.built.map((tokenId, index) => {
+          const token = state.tokens.find(t => t.id === tokenId);
+          return button('remove-word', escape(token.word), 'data-built-index="' + index + '"' + (state.graded ? ' disabled' : ''), 'practice-word is-built');
+        }).join('') : '<span class="practice-built-placeholder">Setze hier deinen Satz zusammen</span>') + '</div>' +
+        '<div class="practice-word-bank" aria-label="Verfügbare Wörter">' + state.tokens.map(token =>
+          button('add-word', escape(token.word), 'data-token="' + token.id + '"' + (state.graded || state.built.includes(token.id) ? ' disabled' : ''), 'practice-word')
+        ).join('') + '</div>' +
+        '<div class="practice-word-tools">' + button('undo', 'Letztes Wort zurücknehmen', (!state.built.length || state.graded ? 'disabled' : ''), 'practice-link') +
+        button('clear-build', 'Leeren', (!state.built.length || state.graded ? 'disabled' : ''), 'practice-link') + '</div>';
+    }
+    let heading;
+    let detail;
+    let placeholder = 'Schreibe deine Antwort auf Englisch …';
+    if (q.type === 'cloze') {
+      const parts = state.cloze.text.split('___');
+      heading = '<p class="practice-cloze-stage">' + escape(state.cloze.label) + '</p><p class="practice-cloze" lang="en">' + escape(parts[0]) + '<span class="practice-gap" aria-label="Lücke">_______</span>' + escape(parts.slice(1).join('___')) + '</p>';
+      detail = escape(item.de);
+      placeholder = 'Nur die fehlenden Wörter …';
+    } else if (q.type === 'fix') {
+      heading = '<p class="practice-translation">' + escape(item.task) + '</p><p class="practice-error-sentence" lang="en">' + escape(item.error.text) + '</p>';
+      detail = item.target.split(/\s+/).length < 3 ? 'Gib den richtigen Begriff für diese Situation ein.' : 'Schreibe den ganzen Satz neu und korrigiere dabei den Fehler. Behalte die Bedeutung bei.';
+    } else if (q.type === 'formal') {
+      heading = '<p class="practice-question-text" lang="en">' + escape(item.informal) + '</p>';
+      detail = 'Verwende eine Formulierung für eine geschäftliche E-Mail und behalte alle Angaben bei. ' + (opening(item) ? 'Beginne mit: <strong lang="en">' + escape(opening(item)) + '</strong>' : 'Verwende den Begriff aus den Lernkarten.');
+    } else {
+      heading = '<p class="practice-question-text">' + escape(item.de) + '</p>';
+      detail = 'Schreibe die gelernte englische Formulierung. Wenn du Hilfe brauchst, öffne einen Tipp.';
+    }
+    return heading + '<p class="practice-translation">' + detail + '</p>' +
+      '<label class="practice-input-label" for="practice-answer">Deine Antwort</label>' +
+      '<textarea id="practice-answer" class="vm-input practice-answer" rows="' + (q.type === 'cloze' ? '2' : '3') + '" lang="en" spellcheck="false" autocapitalize="none" autocomplete="off" placeholder="' + placeholder + '"' + (state.graded ? ' disabled' : '') + '>' + escape(state.value) + '</textarea>';
+  }
+
+  function feedbackHtml(item, q) {
+    let title = state.correct ? (state.hinted ? 'Richtig, mit Tipp' : 'Richtig!') :
+      (q.type === 'recall' || q.type === 'formal' ? 'Vergleiche mit der gelernten Formulierung' : 'Schauen wir uns die Antwort an');
+    let explanation = '';
+    if (q.type === 'fix') explanation = item.error.reason;
+    else if (q.type === 'cloze') explanation = 'In die Lücke gehört: ' + state.cloze.answers[0] + '.';
+    else if (q.type === 'context') explanation = 'Diese Formulierung drückt den gesuchten Gedanken aus: ' + item.de;
+    else if (q.type === 'build') explanation = 'Vergleiche die Wortreihenfolge deiner Antwort mit dem vollständigen Satz.';
+    else explanation = 'Hier übst du die gelernte englische Formulierung. Andere passende Formulierungen kannst du unter „E-Mail schreiben“ verwenden.';
+    if (state.skipped) title = 'Präge dir diese Formulierung ein';
+    return '<div class="practice-feedback ' + (state.correct ? 'is-correct' : 'needs-practice') + '" role="status">' +
+      '<div class="practice-feedback-top"><h4 id="practice-feedback-title" tabindex="-1">' + title + '</h4>' +
+      (state.awarded > 0 ? '<span class="practice-xp">+' + state.awarded + ' XP</span>' : '') + '</div>' +
+      '<p class="practice-correct-answer" lang="en">' + escape(item.target) + '</p>' +
+      '<p>' + escape(explanation) + '</p>' +
+      (!state.correct ? '<p class="practice-feedback-note">Diese Formulierung wird zur Wiederholung vorgemerkt.</p>' : (q.repeat ? '<p class="practice-feedback-note">Fehler korrigiert. Prüfe später noch einmal, ob du die Formulierung ohne Vorlage schreiben kannst.</p>' : '')) +
+      '</div>';
+  }
+
+  function renderQuestion() {
+    const q = lesson.queue[lesson.cursor];
+    const item = lookup(q.id);
+    const meta = types[q.type];
+    const answered = lesson.cursor + (state.graded ? 1 : 0);
+    host.innerHTML = '<div class="practice-lesson">' +
+      '<div class="practice-lesson-top">' + button('settings', '← Einstellungen', '', 'practice-link') +
+      '<span class="practice-lesson-xp">' + lesson.xp + ' XP</span></div>' +
+      '<div class="practice-progress" role="progressbar" aria-label="Lektionsfortschritt" aria-valuemin="0" aria-valuemax="' + lesson.queue.length + '" aria-valuenow="' + answered + '"><span style="width:' + (answered / lesson.queue.length * 100) + '%"></span></div>' +
+      '<div class="practice-round-info"><span>Aufgabe ' + (lesson.cursor + 1) + ' / ' + lesson.queue.length + '</span><span>' + (q.repeat ? '↻ Fehler wiederholen' : escape(byId(q.id).cat)) + '</span></div>' +
+      '<form id="practice-form" class="vm-panel practice-question" novalidate>' +
+        '<span class="practice-mode-label">' + meta.name + '</span>' +
+        '<h3 class="practice-question-heading" id="practice-question-heading" tabindex="-1">' + meta.label + '</h3>' +
+        promptHtml(item, q) +
+        (state.hintLevel > 0 ? '<div class="practice-hint" role="status">' + escape(hintText(item, q)) + '</div>' : '') +
+        '<p id="practice-validation" class="practice-validation" role="alert"></p>' +
+        (state.graded ? feedbackHtml(item, q) : '') +
+        '<div class="practice-actions">' +
+          (state.graded ? button('next', lesson.cursor === lesson.queue.length - 1 ? 'Lektionsergebnis →' : 'Weiter →', 'id="practice-next"', 'vm-primary') :
+            '<button id="practice-check" type="submit" class="vm-primary">Prüfen</button>') +
+          (!state.graded ? button('hint', state.hintLevel ? 'Weiterer Tipp' : 'Tipp', 'id="practice-hint"' + (state.hintLevel >= 2 || (q.type === 'context' && state.hintLevel > 0) ? ' disabled' : '')) : '') +
+        '</div>' +
+        (!state.graded ? button('skip', 'Ich weiß es noch nicht', 'id="practice-skip"', 'practice-link practice-skip') : '') +
+      '</form></div>';
+  }
+
+  function readAnswer(q) {
+    if (q.type === 'context') return state.selected === null ? '' : state.choices[state.selected].target;
+    if (q.type === 'build') return state.built.map(id => state.tokens.find(token => token.id === id).word).join(' ');
+    const input = host.querySelector('#practice-answer');
+    if (input) state.value = input.value;
+    return state.value;
+  }
+
+  function submit(skip) {
+    if (!lesson || !state || state.graded) return;
+    const q = lesson.queue[lesson.cursor];
+    const item = lookup(q.id);
+    const answer = readAnswer(q);
+    if (!skip && !answer.trim()) {
+      host.querySelector('#practice-validation').textContent = q.type === 'context' ? 'Wähle zuerst eine Antwort aus.' : q.type === 'build' ? 'Setze zuerst den Satz aus den Wörtern zusammen.' : 'Gib zuerst eine Antwort ein oder wähle „Ich weiß es noch nicht“.';
+      const input = host.querySelector('#practice-answer');
+      if (input) input.focus();
+      return;
+    }
+    if (!skip && q.type === 'build' && state.built.length < state.tokens.length) {
+      host.querySelector('#practice-validation').textContent = 'Verwende alle Wörter, um den Satz zu vervollständigen.';
+      return;
+    }
+    const accepted = q.type === 'cloze' ? state.cloze.answers : [item.target, ...(item.accepted || [])];
+    const correct = !skip && (q.type === 'context' ? state.choices[state.selected].id === item.id : accepted.some(value => normalized(answer) === normalized(value)));
+    state.graded = true;
+    state.correct = correct;
+    state.skipped = Boolean(skip);
+    const recordKey = q.id + ':' + q.type;
+    const previousAttempt = lesson.recorded.has(recordKey);
+    const award = app.recordResult(item.id, {
+      skill: q.type === 'recall' ? 'write' : 'recognize',
+      correct: correct,
+      hinted: state.hinted || q.repeat,
+      awardXP: !previousAttempt
+    });
+    state.awarded = Number.isFinite(Number(award)) ? Number(award) : 0;
+    lesson.xp += state.awarded;
+    lesson.recorded.add(recordKey);
+    lesson.attempts.push({ id: item.id, type: q.type, correct, hinted: state.hinted, repeat: q.repeat });
+    if (correct) lesson.unresolved.delete(item.id);
+    else {
+      lesson.unresolved.add(item.id);
+      const retries = lesson.retryCount[item.id] || 0;
+      if (retries < 2 && lesson.queue.length < lesson.baseSize + 5) {
+        lesson.retryCount[item.id] = retries + 1;
+        const position = Math.min(lesson.cursor + 4, lesson.queue.length);
+        lesson.queue.splice(position, 0, { id: q.id, type: q.type, repeat: true });
+      }
+    }
+    renderQuestion();
+    const feedback = host.querySelector('#practice-feedback-title');
+    if (feedback) feedback.focus({ preventScroll: true });
+  }
+
+  function finish() {
+    screen = 'summary';
+    const first = lesson.attempts.filter(attempt => !attempt.repeat);
+    const correct = first.filter(attempt => attempt.correct).length;
+    const independent = first.filter(attempt => attempt.correct && !attempt.hinted).length;
+    const mistakes = [...lesson.unresolved];
+    host.innerHTML = '<div class="vm-panel practice-summary">' +
+      '<div class="practice-result-icon" aria-hidden="true">' + (mistakes.length ? '↻' : '✓') + '</div>' +
+      '<div class="practice-kicker">LEKTION ABGESCHLOSSEN</div>' +
+      '<h2 class="practice-heading" tabindex="-1" id="practice-result-heading">' + (mistakes.length ? 'Lektion abgeschlossen' : 'Gut gemacht!') + '</h2>' +
+      '<p class="practice-intro">' + (mistakes.length ? 'Einige Formulierungen brauchen noch etwas Übung.' : 'Alle Fehler dieser Lektion sind korrigiert. Wiederhole die Formulierungen in den nächsten Tagen.') + '</p>' +
+      '<div class="practice-result-stats">' +
+        '<div><strong>' + correct + '/' + lesson.baseSize + '</strong><span>Beim ersten Versuch</span></div>' +
+        '<div><strong>' + independent + '</strong><span>Ohne Tipp</span></div>' +
+        '<div><strong>+' + lesson.xp + '</strong><span>XP in dieser Lektion</span></div>' +
+      '</div>' +
+      (lesson.queue.length > lesson.baseSize ? '<p class="practice-small-note">Zusätzliche Wiederholungen: ' + (lesson.queue.length - lesson.baseSize) + '. Sie zählen nicht zum Ergebnis „Beim ersten Versuch“.</p>' : '') +
+      (mistakes.length ? '<div class="practice-summary-errors"><h3>Noch einmal üben · ' + mistakes.length + '</h3><ul>' + mistakes.map(id => '<li lang="en">' + escape(lookup(id).target) + '</li>').join('') + '</ul></div>' : '') +
+      '<div class="practice-summary-actions">' +
+      (mistakes.length ? button('retry-failed', 'Verbliebene Fehler wiederholen', 'id="practice-retry"', 'vm-primary') : '') +
+      button('start', 'Weitere Lektion', 'id="practice-new"', mistakes.length ? 'vm-secondary' : 'vm-primary') +
+      button('settings', 'Kategorie und Aufgabentyp wählen', '', 'practice-link') +
+      '</div></div>';
+    host.querySelector('#practice-result-heading').focus({ preventScroll: true });
+  }
+
+  function preserveInput() {
+    const input = host.querySelector('#practice-answer');
+    if (input && state) state.value = input.value;
+  }
+
+  function handleClick(event) {
+    const control = event.target.closest('[data-practice-action]');
+    if (!control || !host.contains(control) || control.disabled) return;
+    const action = control.dataset.practiceAction;
+    if (action === 'start') { startLesson(); return; }
+    if (action === 'settings') { setup(); return; }
+    if (action === 'retry-failed') { startLesson([...lesson.unresolved]); return; }
+    if (!lesson || !state) return;
+    if (action === 'next' && state.graded) { lesson.cursor++; nextQuestion(); return; }
+    if (state.graded) return;
+    preserveInput();
+    if (action === 'skip') { submit(true); return; }
+    if (action === 'hint') { state.hinted = true; state.hintLevel = Math.min(2, state.hintLevel + 1); }
+    else if (action === 'choose') { state.selected = Number(control.dataset.choice); }
+    else if (action === 'add-word') {
+      const id = Number(control.dataset.token);
+      if (!state.built.includes(id)) state.built.push(id);
+    } else if (action === 'remove-word') { state.built.splice(Number(control.dataset.builtIndex), 1); }
+    else if (action === 'undo') { state.built.pop(); }
+    else if (action === 'clear-build') { state.built = []; }
+    else return;
+    renderQuestion();
+  }
+
+  function init(container, VM) {
+    host = container;
+    app = VM;
+    host.classList.add('practice-module');
+    host.addEventListener('click', handleClick);
+    host.addEventListener('submit', event => {
+      if (event.target.id !== 'practice-form') return;
+      event.preventDefault();
+      submit(false);
+    });
+    host.addEventListener('change', event => {
+      if (event.target.id === 'practice-category') config.category = event.target.value;
+      else if (event.target.id === 'practice-type') config.type = event.target.value;
+      else if (event.target.id === 'practice-due') config.dueOnly = event.target.checked;
+      else return;
+      updatePoolInfo();
+    });
+    host.addEventListener('input', event => {
+      if (event.target.id === 'practice-answer' && state && !state.graded) state.value = event.target.value;
+    });
+    host.addEventListener('keydown', event => {
+      if (event.target.id === 'practice-answer' && event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
+        event.preventDefault();
+        submit(false);
+      }
+    });
+    setup();
+  }
+
+  function onShow() {
+    if (!host) return;
+    if (screen === 'setup') updatePoolInfo();
+  }
+
+  window.VMPractice = { init: init, onShow: onShow };
+}());
+
+(function () {
+  'use strict';
+  // Fully local writing practice. Pattern matches are clues, not semantic grading.
+  const common = {
+    thanks: /\b(?:thank(?:s| you)|appreciate)\b[^.!?]{0,100}\b(?:email|message|request|enquiry|inquiry)\b/i,
+    apology: /\b(?:sorry|apologi[sz]e|apolog(?:y|ies)|regret)\b/i,
+    attached: /\battach(?:ed|ing|ment|ments)?\b/i,
+    reply: /\b(?:reply|respond|response|confirm|confirmation)\b|\blet (?:me|us) know\b|\bhearing from you\b|\bsuit you\b/i,
+    help: /\b(?:help|assistance|assist|questions|contact)\b/i,
+    greeting: /^\s*(?:dear|hello|hi)\s+\S+/im,
+    closing: /\b(?:kind regards|best regards|regards|yours sincerely|yours faithfully|best wishes)\b/i
+  };
+  const req = (label, patterns) => ({ label, patterns });
+  const missions = [
+    {
+      id: 'documents', title: 'Dokumente und Termin', ru: 'Dokumente und Termin',
+      situation: 'Alex Morgan hat gestern Unterlagen angefordert. Bedanke dich in deiner Antwort für die E-Mail, entschuldige dich für die verspätete Antwort, erwähne die angehängten Dokumente und schlage ein Treffen am Montag um 10:00 Uhr vor. Bitte um eine Bestätigung, ob der Termin passt.',
+      ids: [4, 19, 26, 24, 25, 34],
+      requirements: [req('Bedanke dich für die E-Mail', [common.thanks]), req('Entschuldige dich für die verspätete Antwort', [common.apology, /\b(?:delay|late|responding|replying)\b/i]), req('Erwähne die angehängten Dokumente', [common.attached, /\b(?:documents|files|paperwork)\b/i]), req('Schlage ein Treffen am Montag um 10:00 Uhr vor', [/\bMonday\b/i, /\b(?:10(?::00)?(?:\s*(?:a\.?m\.?|o.clock))?|ten)\b/i, /\b(?:meet(?:ing)?|appointment|suit|available)\b/i]), req('Bitte um eine Bestätigung, ob der Termin passt', [common.reply])],
+      subject: 'Requested documents and a meeting',
+      sample: 'Dear Alex,\n\nThank you for your email. Sorry for the delay in responding to your request. Please find attached the requested documents.\n\nWe can certainly arrange a meeting to discuss the next steps. Would Monday at 10:00 suit you? If this day or time is not convenient, please let me know.\n\nI look forward to your reply.\n\nKind regards,\nSam'
+    },
+    {
+      id: 'information', title: 'Informationen anfordern', ru: 'Informationen anfordern',
+      situation: 'Schreibe an ein Unternehmen, dessen Dienstleistungen dich interessieren. Bitte um eine Broschüre und Informationen zu den Preisen. Bitte höflich um eine Antwort bis Freitag. Deine Ansprechperson ist Taylor Reed.',
+      ids: [1, 7, 8, 9, 33, 34],
+      requirements: [req('Erkläre dein Interesse an den Dienstleistungen', [/\b(?:services|service)\b/i, /\b(?:interested|writing|information|enquiry|inquiry)\b/i]), req('Bitte um eine Broschüre', [/\b(?:brochure|leaflet)\b/i, /\b(?:please|could|would|grateful)\b/i]), req('Frage nach den Preisen', [/\b(?:cost|costs|price|prices|pricing|fees|charges)\b/i]), req('Bitte um eine Antwort bis Freitag', [/\bFriday\b/i, common.reply]), req('Formuliere deine Bitte höflich', [/\b(?:could you please|would be grateful|would you|please let me know)\b/i])],
+      subject: 'Enquiry about your services',
+      sample: 'Dear Taylor,\n\nI am writing to ask for further information about your services. Could you please send me your latest brochure?\n\nWe would be grateful if you could provide details of your fees. Could you please let me know whether there are any additional charges? A reply by Friday would help us plan our next steps.\n\nI look forward to your reply.\n\nKind regards,\nSam'
+    },
+    {
+      id: 'reschedule', title: 'Einen Termin verschieben', ru: 'Einen Termin verschieben',
+      situation: 'Nach eurem gestrigen Telefongespräch hast du einen Termin mit Jordan Lee am Dienstag um 14:00 Uhr. Du kannst nicht kommen. Entschuldige dich, schlage Donnerstag um 11:00 Uhr vor und frage, ob der neue Termin passt.',
+      ids: [6, 16, 21, 23, 24, 25],
+      requirements: [req('Beziehe dich auf das gestrige Telefongespräch', [/\b(?:telephone|phone|call)\b/i, /\byesterday\b/i]), req('Nenne den bisherigen Termin: Dienstag, 14:00 Uhr', [/\bTuesday\b/i, /\b14(?::00)?\b|\b2(?::00)?\s*p\.?m\.?/i]), req('Erkläre, dass du nicht kommen kannst', [/\b(?:cannot|can.t|unable|not possible|won.t be able)\b/i]), req('Entschuldige dich', [common.apology]), req('Schlage Donnerstag um 11:00 Uhr vor', [/\bThursday\b/i, /\b(?:11(?::00)?|eleven)\b/i]), req('Frage, ob der neue Termin passt', [common.reply])],
+      subject: 'Request to reschedule our meeting',
+      sample: 'Dear Jordan,\n\nWith reference to our telephone conversation yesterday, I am afraid I cannot attend our meeting on Tuesday at 2 p.m. I would like to apologize for the inconvenience.\n\nI would suggest meeting in my office on Thursday at 11:00 instead. Would this time suit you? If it is not convenient, please let me know.\n\nI look forward to your reply.\n\nKind regards,\nSam'
+    },
+    {
+      id: 'delay', title: 'Eine Verspätung entschuldigen', ru: 'Eine Verspätung entschuldigen',
+      situation: 'Casey Brown wartet auf den überarbeiteten Bericht. Erkläre, dass die Vorbereitung länger gedauert hat, entschuldige dich und kündige an, den Bericht am Freitag zu schicken. Biete Hilfe an und bitte um eine Rückmeldung, falls der neue Termin nicht passt.',
+      ids: [18, 20, 21, 11, 25, 31],
+      requirements: [req('Erkläre die Verzögerung beim Bericht', [/\breport\b/i, /\b(?:delay|longer|late|behind schedule)\b/i]), req('Entschuldige dich', [common.apology]), req('Nenne den neuen Termin: Freitag', [/\bFriday\b/i, /\b(?:send|sending|deliver|ready|provide)\b/i]), req('Biete Hilfe an', [common.help]), req('Bitte um eine Rückmeldung, falls der Termin nicht passt', [common.reply, /\b(?:deadline|date|time|convenient|work for|suit|Friday)\b/i])],
+      subject: 'Update on the revised report',
+      sample: 'Dear Casey,\n\nJust a quick email to update you on the revised report. Preparing the final version has taken longer than expected. We would like to apologize for the delay and any inconvenience caused.\n\nWe will send you the completed report on Friday. If this deadline is not convenient, please let me know. We would be happy to help with any urgent questions in the meantime.\n\nKind regards,\nSam'
+    },
+    {
+      id: 'bad-news', title: 'Schlechte Nachrichten übermitteln', ru: 'Schlechte Nachrichten übermitteln',
+      situation: 'Teile Robin Green mit, dass die Bestellung am Freitag nicht geliefert werden kann. Entschuldige dich für die Unannehmlichkeiten, schlage eine Lieferung am Montag vor und bitte um eine Bestätigung, ob diese Alternative passt. Erfinde keinen Grund für die Verzögerung.',
+      ids: [15, 17, 20, 11, 8, 32],
+      requirements: [req('Teile die Einschränkung höflich mit', [/\b(?:regret|unfortunately|afraid)\b/i, /\b(?:cannot|can.t|unable|not possible)\b/i]), req('Erkläre, dass die Lieferung am Freitag nicht möglich ist', [/\bFriday\b/i, /\b(?:deliver|delivery|order)\b/i]), req('Entschuldige dich für die Unannehmlichkeiten', [common.apology, /\binconvenience\b/i]), req('Schlage eine Lieferung am Montag vor', [/\bMonday\b/i, /\b(?:deliver|delivery|arrange|offer)\b/i]), req('Bitte um eine Bestätigung der Alternative', [common.reply])],
+      subject: 'Alternative delivery date for your order',
+      sample: 'Dear Robin,\n\nWe regret to inform you that we are unable to deliver your order on Friday. We would like to apologize for the inconvenience.\n\nWe would be happy to arrange delivery on Monday instead. Could you please let me know whether this alternative would suit you? If I can help in any way, please do not hesitate to contact me.\n\nKind regards,\nSam'
+    },
+    {
+      id: 'good-news', title: 'Gute Nachrichten mitteilen', ru: 'Gute Nachrichten mitteilen',
+      situation: 'Teile Jamie Parker mit, dass der Vorschlag angenommen wurde und das Bestätigungsschreiben angehängt ist. Schlage ein Treffen am Mittwoch um 15:00 Uhr vor, um die nächsten Schritte zu besprechen. Biete Unterstützung bei Fragen an.',
+      ids: [13, 14, 26, 22, 24, 31],
+      requirements: [req('Teile mit, dass der Vorschlag angenommen wurde', [/\b(?:pleased|delighted|happy)\b/i, /\bproposal\b/i, /\b(?:accepted|approved)\b/i]), req('Erwähne die angehängte Bestätigung', [common.attached, /\bconfirmation\b/i]), req('Schlage ein Treffen am Mittwoch um 15:00 Uhr vor', [/\bWednesday\b/i, /\b15(?::00)?\b|\b3(?::00)?\s*p\.?m\.?/i]), req('Nenne das Ziel des Treffens: die nächsten Schritte', [/\bnext steps\b/i, /\b(?:discuss|meeting|meet)\b/i]), req('Biete Unterstützung bei Fragen an', [common.help])],
+      subject: 'Your proposal has been accepted',
+      sample: 'Dear Jamie,\n\nWe are delighted to inform you that your proposal has been accepted. Please find attached the confirmation letter.\n\nWe can certainly arrange a meeting to discuss the next steps. Would Wednesday at 3 p.m. suit you? If this day or time is not convenient, please let me know.\n\nIf we can be of any further assistance, please let us know.\n\nKind regards,\nSam'
+    }
+  ];
+  const orderExercises = [
+    { id: 'documents', title: 'Dokumente und Termin', intro: 'Ordne die Antwort an einen Kunden. Der Dank steht vor der Hauptnachricht. Die Entschuldigung und der Hinweis auf den Anhang dürfen ihre Plätze tauschen.',
+      parts: ['Dear Alex,', 'Thank you for your email.', 'Sorry for the delay in responding to your request.', 'Please find attached the requested documents.', 'Would Monday at 10:00 suit you?', 'I look forward to your reply.', 'Kind regards,\nSam'],
+      accepted: [[0, 1, 2, 3, 4, 5, 6], [0, 1, 3, 2, 4, 5, 6]] },
+    { id: 'request', title: 'Eine Informationsanfrage', intro: 'Ordne die E-Mail: Anrede → Schreibanlass → Bitten → Bitte um Rückmeldung → Grußformel und Name. Die beiden Bitten dürfen ihre Plätze tauschen.',
+      parts: ['Dear Taylor,', 'I am writing to ask for further information about your services.', 'Could you please send me your latest brochure?', 'We would be grateful if you could provide details of your fees.', 'I look forward to your reply.', 'Kind regards,\nSam'],
+      accepted: [[0, 1, 2, 3, 4, 5], [0, 1, 3, 2, 4, 5]] }
+  ];
+  let root, VM, mode = 'write', missionIndex = 0, level = 'guided', draft = {}, report = null, sampleOpen = false;
+  let orderIndex = 0, order = [], orderFeedback = null, orderSolved = false;
+  const $ = selector => root.querySelector(selector);
+  const esc = value => VM.escape(String(value ?? ''));
+  const countWords = value => (String(value).trim().match(/\b[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*\b/gu) || []).length;
+  const currentMission = () => missions[missionIndex];
+  const draftKey = () => 'email:' + currentMission().id + ':' + level;
+  function persist() {
+    VM.saveDraft(draftKey(), { subject: draft.subject || '', body: draft.body || '', level, sampleViewed: !!draft.sampleViewed, checkedOnce: !!draft.checkedOnce, updatedAt: Date.now() });
+  }
+  function saveFields() {
+    if (mode !== 'write' || !$('#email-body')) return;
+    draft.subject = $('#email-subject').value;
+    draft.body = $('#email-body').value;
+    persist();
+  }
+  function loadDraft(fallback) {
+    const saved = VM.getDraft(draftKey());
+    draft = saved || fallback || { subject: '', body: '', sampleViewed: false };
+    draft = { subject: String(draft.subject || ''), body: String(draft.body || ''), sampleViewed: !!draft.sampleViewed, checkedOnce: !!saved?.checkedOnce };
+    report = null; sampleOpen = false;
+  }
+  function navigation() {
+    return '<div class="email-mode-switch" role="group" aria-label="Art der E-Mail-Übung">' +
+      [['write', 'E-Mail schreiben'], ['arrange', 'E-Mail ordnen']].map(([id, label]) => '<button type="button" class="vm-pill" data-email-action="mode" data-mode="' + id + '" aria-pressed="' + (mode === id) + '">' + label + '</button>').join('') + '</div>';
+  }
+  function render() { root.innerHTML = navigation() + (mode === 'write' ? renderWriting() : renderOrder()); }
+  function renderWriting() {
+    const m = currentMission();
+    const complete = VM.getMission('write:' + m.id);
+    const phraseBank = m.ids.map(id => VM.vocabulary.find(v => v.id === id)).filter(Boolean);
+    return '<section class="vm-panel email-panel" aria-labelledby="email-heading">' +
+      '<div class="email-heading"><div><span class="vm-small vm-muted">E-MAIL-AUFGABE ' + (missionIndex + 1) + ' / ' + missions.length + '</span><h2 id="email-heading">' + esc(m.title) + '</h2></div>' + (complete ? '<span class="email-completed">✓ Nach Selbstprüfung abgeschlossen</span>' : '') + '</div>' +
+      '<label class="email-label" for="email-mission">Szenario</label><select id="email-mission" class="vm-select">' + missions.map((v, i) => '<option value="' + i + '"' + (i === missionIndex ? ' selected' : '') + '>' + (i + 1) + '. ' + esc(v.ru) + '</option>').join('') + '</select>' +
+      '<div class="email-levels" role="group" aria-label="Umfang der Schreibhilfe">' + [['guided', 'Mit Hilfe', 'Mit Sätzen'], ['plan', 'Nach Plan', 'Mit Aufbau'], ['exam', 'Ohne Hilfe', 'Freies Schreiben']].map(([id, name, label]) => '<button type="button" data-email-action="level" data-level="' + id + '" aria-pressed="' + (level === id) + '"><strong>' + name + '</strong><span>' + label + '</span></button>').join('') + '</div>' +
+      '<div class="email-brief"><h3>Deine Aufgabe</h3><p>' + esc(m.situation) + '</p><p class="vm-small vm-muted">Schreibe 5–7 inhaltliche Sätze und ergänze Betreff, Anrede, Grußformel und Namen. Verwende die Namen und Angaben aus der Aufgabe.</p>' +
+      (level !== 'exam' ? '<ul>' + m.requirements.map(r => '<li>' + esc(r.label) + '</li>').join('') + '</ul>' : '') + '</div>' +
+      (level === 'guided' ? '<details class="email-bank" open><summary>Nützliche Formulierungen</summary><ul>' + phraseBank.map(v => '<li lang="en">' + esc(v.en) + '</li>').join('') + '</ul></details>' : '') +
+      '<label class="email-label" for="email-subject">Betreff</label><input id="email-subject" class="vm-input" type="text" lang="en" autocomplete="off" spellcheck="false" maxlength="180" placeholder="Formuliere einen klaren Betreff auf Englisch" value="' + esc(draft.subject) + '">' +
+      '<label class="email-label" for="email-body">Deine E-Mail</label><textarea id="email-body" class="vm-input email-editor" lang="en" spellcheck="false" maxlength="12000" placeholder="Dear …">' + esc(draft.body) + '</textarea>' +
+      '<div class="email-draft-meta"><span id="email-word-count">' + countWords(draft.body) + ' Wörter</span><span>Dein Entwurf wird in diesem Browser gespeichert</span></div>' +
+      '<p class="vm-small vm-muted email-check-note">Die Prüfung sucht nach Aufgabeninhalten und typischen Fehlern. Vergleiche eigene Formulierungen mit dem Beispiel.</p>' +
+      '<div class="email-actions"><button type="button" id="email-check" class="vm-primary" data-email-action="check">E-Mail prüfen</button><button type="button" class="vm-secondary" data-email-action="sample"' + (level === 'exam' && !draft.checkedOnce ? ' hidden' : '') + '>' + (sampleOpen ? 'Beispiel ausblenden' : 'Beispiel anzeigen') + '</button><button type="button" class="vm-secondary" data-email-action="download">Als TXT speichern</button></div>' +
+      (level === 'exam' && !draft.checkedOnce ? '<p class="vm-small vm-muted">Im Modus „Ohne Hilfe“ wird das Beispiel nach der ersten Prüfung deiner E-Mail freigeschaltet.</p>' : '') +
+      '<p id="email-message" class="email-message" role="status" aria-live="polite"></p>' +
+      (report ? renderReport(m, phraseBank) : '') +
+      (sampleOpen ? '<section class="email-sample" aria-label="Beispiel-E-Mail"><h3>Eine mögliche Lösung</h3><p class="vm-small vm-muted">Auch andere Formulierungen können richtig sein. Vergleiche Inhalt, Einzelheiten und Ton.</p><strong>Betreff: ' + esc(m.subject) + '</strong><pre lang="en">' + esc(m.sample) + '</pre></section>' : '') + '</section>';
+  }
+  function findEvidence(body, pattern) {
+    const match = pattern.exec(body);
+    if (!match) return '';
+    const start = Math.max(0, match.index - 28), end = Math.min(body.length, match.index + match[0].length + 45);
+    return (start ? '…' : '') + body.slice(start, end).replace(/\s+/g, ' ') + (end < body.length ? '…' : '');
+  }
+  function inspectEmail(m) {
+    const body = String(draft.body || '').replace(/[’‘]/g, "'");
+    const requirements = [...m.requirements, req('Eine Anrede ist vorhanden', [common.greeting]), req('Eine höfliche Grußformel ist vorhanden', [common.closing])];
+    const rows = requirements.map(r => ({ label: r.label, found: r.patterns.every(p => p.test(body)), evidence: findEvidence(body, r.patterns[0]) }));
+    const rules = [
+      [/\blook(?:ing)?\s+forward\s+to\s+(?:hear|meet|see|receive)(?!\w)/i, 'Nach look forward to steht die -ing-Form: hearing, meeting, seeing, receiving.'],
+      [/\bapologi[sz]e\s+(?:of|about)\b/i, 'Verwende in dieser Konstruktion apologize for: apologize for the delay.'],
+      [/\bcould\s+you\s+(?:please\s+)?to\s+\w+/i, 'Nach could you (please) steht das Verb ohne to: Could you please send …?'],
+      [/\bwould\s+be\s+(?:greatful|gratefull)\b/i, 'Achte auf die Schreibweise: grateful.'],
+      [/\b(?:I|we)\s+am\s+write\b|\bI\s+writing\b/i, 'Für den Einstieg in die E-Mail: I am writing to …'],
+      [/\b(?:sorry|apologi[sz]e)\s+for\s+delay\b/i, 'In dieser Formulierung brauchst du normalerweise the: Sorry for the delay …']
+    ];
+    return { rows, grammar: rules.filter(([pattern]) => pattern.test(body)).map(([pattern, text]) => ({ text, evidence: findEvidence(body, pattern) })), attachmentNote: /\b(?:enclosed|enclosure)\b/i.test(body) };
+  }
+  function renderReport(m, phrases) {
+    const found = report.rows.filter(r => r.found).length;
+    return '<section class="email-report" id="email-report" aria-labelledby="email-feedback-heading"><h3 id="email-feedback-heading">Prüfung deines Entwurfs</h3><p><strong>' + found + ' / ' + report.rows.length + '</strong> Punkte enthalten die erwarteten Schlüsselwörter.</p><p class="vm-small vm-muted">Diese Hinweise helfen dir bei der Selbstprüfung. Passende Wörter bestätigen nicht automatisch die inhaltliche Richtigkeit. Fehlende Treffer bedeuten nicht immer einen Fehler.</p>' +
+      '<ul class="email-checklist">' + report.rows.map(r => '<li class="' + (r.found ? 'email-found' : 'email-review') + '"><strong>' + (r.found ? '✓ Gefunden: ' : '○ Prüfe: ') + esc(r.label) + '</strong>' + (r.found && r.evidence ? '<span lang="en">' + esc(r.evidence) + '</span>' : '') + '</li>').join('') + '</ul>' +
+      '<h4>Typische sprachliche Fehler</h4>' + (report.grammar.length ? '<ul class="email-grammar">' + report.grammar.map(g => '<li>' + esc(g.text) + '<span lang="en">' + esc(g.evidence) + '</span></li>').join('') + '</ul>' : '<p class="vm-small">Keine der überprüften Fehlerarten wurde gefunden. Dies ist keine vollständige Grammatikprüfung.</p>') +
+      (report.attachmentNote ? '<p class="email-language-tip">Für einen E-Mail-Anhang verwendest du in diesem Lernset attached / attachment. Enclosed / enclosure bezieht sich auf eine Anlage zu einem Brief auf Papier.</p>' : '') +
+      '<fieldset class="email-selfcheck"><legend>Welche Formulierungen hast du verwendet?</legend><p class="vm-small vm-muted">Markiere die Formulierungen, die in deinem Text vorkommen. Namen, Daten und Einzelheiten darfst du anpassen.</p>' + phrases.map(v => '<label><input type="checkbox" name="email-used-phrase" value="' + v.id + '"><span lang="en">' + esc(v.en) + '</span></label>').join('') + '</fieldset>' +
+      '<label class="email-confirm"><input type="checkbox" id="email-self-reviewed"><span>Ich habe geprüft, ob meine E-Mail alle Anforderungen erfüllt und ob Daten, Inhalt und Formulierungen stimmen.</span></label>' +
+      '<button type="button" class="vm-primary" id="email-complete" data-email-action="complete" disabled>Nach Selbstprüfung abschließen</button><p class="vm-small vm-muted">Die Markierung „Angewendet“ beruht auf deiner Selbstprüfung. Beim ersten Abschluss der Aufgabe erhältst du Erfahrungspunkte.</p></section>';
+  }
+  function message(text) { const node = $('#email-message'); if (node) node.textContent = text; }
+  function check() {
+    saveFields();
+    if (!draft.subject.trim() || countWords(draft.body) < 3) { message('Ergänze Betreff und Nachricht und klicke dann auf „E-Mail prüfen“.'); return; }
+    draft.checkedOnce = true; persist();
+    report = inspectEmail(currentMission()); render(); $('#email-feedback-heading').setAttribute('tabindex', '-1'); $('#email-feedback-heading').focus({ preventScroll: true });
+  }
+  function completeMission() {
+    if (!report || !$('#email-self-reviewed')?.checked) return;
+    const phraseIds = Array.from(root.querySelectorAll('input[name="email-used-phrase"]:checked')).map(n => Number(n.value));
+    if (!phraseIds.length) { message('Markiere mindestens eine Formulierung, die du tatsächlich verwendet hast.'); return; }
+    if (countWords(draft.body) < 20) { message('Vervollständige deine E-Mail: Zum Abschluss brauchst du mindestens 20 Wörter und musst alle Anforderungen erfüllen.'); return; }
+    const xp = VM.markMission('write:' + currentMission().id, { phraseIds, level, reviewed: true, assisted: level === 'guided' || !!draft.sampleViewed, sampleViewed: !!draft.sampleViewed, wordCount: countWords(draft.body), completedAt: Date.now() });
+    render(); message('Die Aufgabe ist nach deiner Selbstprüfung als abgeschlossen markiert.' + (Number(xp) > 0 ? ' +' + Number(xp) + ' XP.' : ' Deine Wiederholung wurde gespeichert.'));
+  }
+  function downloadDraft() {
+    saveFields();
+    if (!draft.body.trim()) { message('Schreibe zuerst den Text deiner E-Mail.'); return; }
+    const blob = new Blob(['Subject: ' + draft.subject + '\n\n' + draft.body], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href = url; a.download = 'email-' + currentMission().id + '.txt'; document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000); message('Deine E-Mail steht zum Herunterladen bereit.');
+  }
+  function shuffleOrder() {
+    const ex = orderExercises[orderIndex]; order = VM.shuffle(ex.parts.map((_, i) => i));
+    if (ex.accepted.some(a => a.join(',') === order.join(','))) order.push(order.shift());
+    orderFeedback = null; orderSolved = false;
+  }
+  function renderOrder() {
+    const ex = orderExercises[orderIndex];
+    if (!order.length) shuffleOrder();
+    return '<section class="vm-panel email-panel" aria-labelledby="email-order-heading"><span class="vm-small vm-muted">EINE VOLLSTÄNDIGE E-MAIL ZUSAMMENSETZEN</span><h2 id="email-order-heading">E-Mail ordnen</h2>' +
+      '<label class="email-label" for="email-order-select">Aufgabe</label><select id="email-order-select" class="vm-select">' + orderExercises.map((v, i) => '<option value="' + i + '"' + (i === orderIndex ? ' selected' : '') + '>' + esc(v.title) + '</option>').join('') + '</select>' +
+      '<p>' + esc(ex.intro) + '</p><p class="vm-small vm-muted">Verschiebe die Abschnitte mit den Tasten ↑ und ↓. Die Prüfung akzeptiert die in der Aufgabe genannten Reihenfolgen.</p>' +
+      '<ol class="email-order-list">' + order.map((part, position) => '<li><span class="email-order-number">' + (position + 1) + '</span><p lang="en">' + esc(ex.parts[part]) + '</p><div class="email-order-controls"><button type="button" data-email-action="move" data-position="' + position + '" data-direction="-1" aria-label="Abschnitt ' + (position + 1) + ' nach oben verschieben"' + (position === 0 || orderSolved ? ' disabled' : '') + '>↑</button><button type="button" data-email-action="move" data-position="' + position + '" data-direction="1" aria-label="Abschnitt ' + (position + 1) + ' nach unten verschieben"' + (position === order.length - 1 || orderSolved ? ' disabled' : '') + '>↓</button></div></li>').join('') + '</ol>' +
+      (orderFeedback ? '<div class="email-order-feedback ' + (orderFeedback.correct ? 'email-found' : 'email-review') + '" role="status">' + esc(orderFeedback.text) + '</div>' : '') +
+      '<div class="email-actions"><button type="button" class="vm-primary" data-email-action="check-order"' + (orderSolved ? ' disabled' : '') + '>Reihenfolge prüfen</button><button type="button" class="vm-secondary" data-email-action="shuffle-order">Neu mischen</button></div></section>';
+  }
+  function onClick(event) {
+    const button = event.target.closest('[data-email-action]'); if (!button || !root.contains(button)) return;
+    const action = button.dataset.emailAction;
+    if (action === 'mode') { saveFields(); mode = button.dataset.mode; render(); }
+    else if (action === 'level') { saveFields(); const previous = { ...draft }; level = button.dataset.level; loadDraft(previous); persist(); render(); }
+    else if (action === 'check') check();
+    else if (action === 'sample') { if (level === 'exam' && !draft.checkedOnce) return; saveFields(); sampleOpen = !sampleOpen; if (sampleOpen) { draft.sampleViewed = true; persist(); } render(); }
+    else if (action === 'download') downloadDraft();
+    else if (action === 'complete') completeMission();
+    else if (action === 'move') {
+      const from = Number(button.dataset.position), to = from + Number(button.dataset.direction);
+      if (!orderSolved && to >= 0 && to < order.length) { [order[from], order[to]] = [order[to], order[from]]; orderFeedback = null; render(); const next = root.querySelector('[data-email-action="move"][data-position="' + to + '"][data-direction="' + button.dataset.direction + '"]'); if (next && !next.disabled) next.focus({ preventScroll: true }); }
+    } else if (action === 'shuffle-order') { shuffleOrder(); render(); }
+    else if (action === 'check-order') {
+      const ex = orderExercises[orderIndex];
+      const correct = ex.accepted.some(a => a.join(',') === order.join(','));
+      orderSolved = correct;
+      let text = 'Prüfe die Reihenfolge: Anrede → Einstieg → Hauptnachricht und Bitte → Abschluss → Grußformel und Name.';
+      if (correct) { const xp = VM.markMission('arrange:' + ex.id, { phraseIds: [], type: 'arrange', completedAt: Date.now() }); text = 'Richtig! Deine E-Mail ist schlüssig aufgebaut.' + (Number(xp) > 0 ? ' +' + Number(xp) + ' XP.' : ' Du kannst die Abschnitte neu mischen und noch einmal üben.'); }
+      orderFeedback = { correct, text }; render();
+    }
+  }
+  function onChange(event) {
+    if (event.target.id === 'email-mission') { saveFields(); missionIndex = Number(event.target.value); loadDraft(); render(); }
+    else if (event.target.id === 'email-order-select') { orderIndex = Number(event.target.value); shuffleOrder(); render(); }
+    else if (event.target.id === 'email-self-reviewed') $('#email-complete').disabled = !event.target.checked;
+  }
+  function onInput(event) {
+    if (!['email-subject', 'email-body'].includes(event.target.id)) return;
+    saveFields(); $('#email-word-count').textContent = countWords(draft.body) + ' Wörter';
+    if (report) { report = null; $('#email-report')?.remove(); message('Dein Entwurf wurde geändert. Klicke für eine neue Prüfung auf „E-Mail prüfen“.'); }
+  }
+  window.VMEmail = {
+    init(container, api) { root = container; VM = api; loadDraft(); root.addEventListener('click', onClick); root.addEventListener('change', onChange); root.addEventListener('input', onInput); render(); },
+    onShow() { if (!root) return; render(); }
+  };
+})();
+
+window.initTrainer();
+</script>
+</body>
+</html>
